@@ -10,8 +10,8 @@
     <style>
         :root {
             --bg-color: #1a1a2e;
-            --primary-color: #ff9eb9; /* Màu hồng nhạt dịu dàng */
-            --secondary-color: #89cff0; /* Màu xanh baby */
+            --primary-color: #ff9eb9;
+            --secondary-color: #89cff0;
             --text-color: #e6e6e6;
             --secondary-text: #b8b8e0;
             --glow-color: rgba(255, 158, 185, 0.4);
@@ -89,12 +89,22 @@
             box-shadow: 0 0 30px var(--glow-color), 0 0 10px var(--primary-color) inset;
         }
 
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         .header h1 {
             color: var(--primary-color);
             font-size: 2.5em;
             margin-bottom: 10px;
             text-shadow: 0 0 12px var(--glow-color);
             animation: pulseGlow 2.5s infinite alternate ease-in-out;
+        }
+
+        @keyframes pulseGlow {
+            from { text-shadow: 0 0 10px var(--glow-color); opacity: 0.9; }
+            to { text-shadow: 0 0 18px var(--glow-color); opacity: 1; }
         }
 
         .header p {
@@ -120,6 +130,17 @@
             color: var(--secondary-text);
             opacity: 0;
             animation: slideIn 0.6s ease-out forwards;
+        }
+
+        .status-check p:nth-child(1) { animation-delay: 0.6s; }
+        .status-check p:nth-child(2) { animation-delay: 0.9s; }
+        .status-check p:nth-child(3) { animation-delay: 1.2s; }
+        .status-check p:nth-child(4) { animation-delay: 1.5s; }
+        .status-check p:nth-child(5) { animation-delay: 1.8s; }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-15px); }
+            to { opacity: 1; transform: translateX(0); }
         }
 
         .status-check strong {
@@ -148,6 +169,11 @@
             background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
             animation: progress 2s ease-in-out forwards;
             animation-delay: 1.8s;
+        }
+
+        @keyframes progress {
+            from { width: 0; }
+            to { width: 100%; }
         }
 
         .message {
@@ -192,25 +218,8 @@
             transition: transform 0.3s ease;
         }
 
-        /* Animations */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes pulseGlow {
-            from { text-shadow: 0 0 10px var(--glow-color); opacity: 0.9; }
-            to { text-shadow: 0 0 18px var(--glow-color); opacity: 1; }
-        }
-
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateX(-15px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-
-        @keyframes progress {
-            from { width: 0; }
-            to { width: 100%; }
+        .icon:hover {
+            transform: scale(1.2) rotate(15deg);
         }
 
         @keyframes gentleBounce {
@@ -240,11 +249,11 @@
         </div>
 
         <div class="status-check">
-            <p><strong>[CẢM BIẾN]:</strong> Ghi nhận một tâm hồn đẹp...</p>
-            <p><strong>[ĐỊNH VỊ]:</strong> Người đẹp Bình Liêu <strong>Ngọc Quyên</strong> hiện tại <strong>Hải Hà</strong>.</p>
-            <p id="energy-level"><strong>[PHÂN TÍCH]:</strong> Năng lượng tích cực <span style="color: var(--soft-highlight);">+20%</span> ✨.</p>
-            <p id="system-status"><strong>[TRẠNG THÁI]:</strong> Không gian: <strong class="status-ok">Ấm Áp & Dịu Dàng</strong></p>
-            <p><strong>[KẾT NỐI]:</strong> Giao hòa cùng thiên nhiên:</p>
+            <p id="sensor-line"><strong>[CẢM BIẾN]:</strong> Ghi nhận một tâm hồn đẹp...</p>
+            <p id="location-line"><strong>[ĐỊNH VỊ]:</strong> Người đẹp Bình Liêu <strong>Ngọc Quyên</strong> hiện tại <strong>Hải Hà</strong>.</p>
+            <p id="energy-line"><strong>[PHÂN TÍCH]:</strong> Năng lượng tích cực <span style="color: var(--soft-highlight);">+20%</span> ✨.</p>
+            <p id="status-line"><strong>[TRẠNG THÁI]:</strong> Không gian: <strong class="status-ok">Ấm Áp & Dịu Dàng</strong></p>
+            <p id="connection-line"><strong>[KẾT NỐI]:</strong> Giao hòa cùng thiên nhiên:</p>
             <div class="progress-container">
                 <div class="progress-bar"></div>
             </div>
@@ -297,45 +306,70 @@
             {
                 baseTitle: `Chào ${timeGreeting}, Ngọc Quyên!`,
                 subtitle: "Từ Bình Liêu đến Hải Hà, nụ cười ấy vẫn thế...",
-                energy: "Năng lượng tích cực <span style='color: var(--soft-highlight);'>+20%</span> ✨.",
-                status: "Ấm Áp & Dịu Dàng",
                 message: "Hải Hà hôm nay đẹp hơn bởi có em ở đây, như bông hoa nở giữa biển trời."
             },
             {
                 baseTitle: `${timeGreeting} An Lành, Ngọc Quyên!`,
                 subtitle: "Người con gái Bình Liêu mang nắng đến Hải Hà",
-                energy: "Sức sống lan tỏa <span style='color: var(--soft-highlight);'>+22%</span> 🌸.",
-                status: "Tươi Mới & Rạng Rỡ",
                 message: "Em như làn gió mát từ Bình Liêu, làm dịu đi cái nắng Hải Hà."
             },
             {
                 baseTitle: `Ngọc Quyên Dịu Dàng!`,
                 subtitle: "Hải Hà thêm đẹp bởi nụ cười em",
-                energy: "Cảm xúc ấm áp <span style='color: var(--soft-highlight);'>+19%</span> 💫.",
-                status: "Ngọt Ngào & Đáng Yêu",
                 message: "Mỗi ngày có em ở Hải Hà là một ngày biển xanh thêm rạng rỡ."
-            },
-            {
-                baseTitle: `Gửi Ngọc Quyên!`,
-                subtitle: "Người làm Hải Hà thêm phần thi vị",
-                energy: "Sự thu hút <span style='color: var(--soft-highlight);'>+21%</span> 🌊.",
-                status: "Quyến Rũ & Thanh Tao",
-                message: "Từ Bình Liêu núi rừng đến Hải Hà biển cả, em vẫn là đóa hoa đẹp nhất."
             }
         ];
+
+        // Nội dung ngẫu nhiên cho status-check
+        const statusContent = {
+            sensor: [
+                "Ghi nhận một tâm hồn đẹp...",
+                "Phát hiện nụ cười tỏa nắng...",
+                "Cảm nhận năng lượng tích cực..."
+            ],
+            location: [
+                "Người đẹp Bình Liêu <strong>Ngọc Quyên</strong> hiện tại <strong>Hải Hà</strong>.",
+                "Tín hiệu từ <strong>Ngọc Quyên</strong> đang ở <strong>Hải Hà</strong>.",
+                "Đang kết nối với <strong>Ngọc Quyên</strong> tại <strong>Hải Hà</strong>."
+            ],
+            energy: [
+                "Năng lượng tích cực <span style='color: var(--soft-highlight);'>+20%</span> ✨.",
+                "Sức sống lan tỏa <span style='color: var(--soft-highlight);'>+18%</span> 🌸.",
+                "Cảm xúc ấm áp <span style='color: var(--soft-highlight);'>+22%</span> 💫."
+            ],
+            status: [
+                "Ấm Áp & Dịu Dàng",
+                "Tươi Mới & Rạng Rỡ",
+                "Ngọt Ngào & Đáng Yêu"
+            ],
+            connection: [
+                "Giao hòa cùng thiên nhiên:",
+                "Kết nối với vũ trụ:",
+                "Hòa điệu cùng biển trời:"
+            ]
+        };
 
         // Flirt messages with subtle romantic hints
         const flirtMessages = [
             "Mỗi khi em cười, Hải Hà như bừng sáng...",
             "Gió từ Bình Liêu mang theo hương sắc, em từ Hải Hà tỏa nắng ấm áp",
-            "Có những nụ cười khiến lòng người ấm lại, như nắng mai trên sóng biển...",
+            "Có những nụ cười khiến lòng người ấm lại, como nắng mai trên sóng biển...",
             "Em như bài thơ Bình Liêu viết giữa lòng Hải Hà",
             "Nếu Hải Hà có mùa đông lạnh giá, thì em chính là nắng ấm xua tan điều ấy",
-            "Người ta bảo Hải Hà đẹp vì biển, nhưng với tôi, Hải Hà đẹp vì có em",
-            "Từ Bình Liêu xa xôi đến Hải Hà gần gũi, em vẫn là cô gái khiến lòng tôi xao xuyến",
-            "Mưa Hải Hà có lạnh không em? Nhớ giữ ấm cho người con gái Bình Liêu nhé",
-            "Chúc em một ngày đẹp như chính nụ cười em vậy"
+            "Người ta bảo Hải Hà đẹp vì biển, nhưng với tôi, Hải Hà đẹp vì có em"
         ];
+
+        // Chọn ngẫu nhiên nội dung cho status-check
+        function getRandomStatus() {
+            document.getElementById('sensor-line').innerHTML = `<strong>[CẢM BIẾN]:</strong> ${statusContent.sensor[Math.floor(Math.random() * statusContent.sensor.length)]}`;
+            document.getElementById('location-line').innerHTML = `<strong>[ĐỊNH VỊ]:</strong> ${statusContent.location[Math.floor(Math.random() * statusContent.location.length)]}`;
+            document.getElementById('energy-line').innerHTML = `<strong>[PHÂN TÍCH]:</strong> ${statusContent.energy[Math.floor(Math.random() * statusContent.energy.length)]}`;
+            
+            const randomStatus = statusContent.status[Math.floor(Math.random() * statusContent.status.length)];
+            document.getElementById('status-line').innerHTML = `<strong>[TRẠNG THÁI]:</strong> Không gian: <strong class="status-ok">${randomStatus}</strong>`;
+            
+            document.getElementById('connection-line').innerHTML = `<strong>[KẾT NỐI]:</strong> ${statusContent.connection[Math.floor(Math.random() * statusContent.connection.length)]}`;
+        }
 
         // Select random content
         const randomContent = contentVariations[Math.floor(Math.random() * contentVariations.length)];
@@ -343,9 +377,10 @@
         // Update content
         document.getElementById('greeting-title').textContent = randomContent.baseTitle;
         document.getElementById('greeting-subtitle').textContent = randomContent.subtitle;
-        document.getElementById('energy-level').innerHTML = `<strong>[PHÂN TÍCH]:</strong> ${randomContent.energy}`;
-        document.getElementById('system-status').innerHTML = `<strong>[TRẠNG THÁI]:</strong> Không gian: <strong class="status-ok">${randomContent.status}</strong>`;
         document.getElementById('main-message').innerHTML = randomContent.message;
+        
+        // Set random status
+        getRandomStatus();
 
         // Flirt message rotation
         let currentFlirtIndex = 0;
