@@ -3,416 +3,209 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chào Ngọc Quyên!</title>
+    <title>Lời Chào Đến Quyên!</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Roboto+Mono:wght@400&display=swap" rel="stylesheet">
     <style>
         :root {
+            /* Reverted to Pink/Purple Scheme */
             --bg-color: #1a1a2e;
-            --primary-color: #ff9eb9;
-            --secondary-color: #89cff0;
+            --primary-color: #ff7eb9; /* Vibrant Pink */
+            --secondary-color: #00f5d4; /* Vibrant Teal as secondary highlight */
             --text-color: #e6e6e6;
-            --secondary-text: #b8b8e0;
-            --glow-color: rgba(255, 158, 185, 0.4);
-            --soft-highlight: #ffcce6;
+            --secondary-text: #f0b6d1; /* Lighter pink for secondary text */
+            --glow-color: rgba(255, 126, 185, 0.5); /* Pink glow */
+            --particle-color: var(--primary-color); /* Pink particles */
+            --container-bg: rgba(26, 26, 46, 0.9);
+            --status-ok-color: var(--secondary-color); /* Use Teal for status OK */
         }
 
-        body {
-            background: var(--bg-color);
-            font-family: 'Poppins', sans-serif;
-            color: var(--text-color);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            overflow: hidden;
-            padding: 20px;
-            box-sizing: border-box;
-            position: relative;
-        }
+        /* --- CSS cơ bản (giống các phiên bản trước, đã áp dụng màu mới) --- */
+        body { background: var(--bg-color); font-family: 'Poppins', sans-serif; color: var(--text-color); display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; overflow: hidden; padding: 20px; box-sizing: border-box; position: relative; }
+        #particles { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+        .particle { position: absolute; background: var(--particle-color); border-radius: 50%; opacity: 0; animation: float 10s infinite ease-in-out; }
+        @keyframes float { 0% { transform: translateY(10vh) scale(0.8); opacity: 0; } 25% { opacity: 0.6; } 50% { transform: translateY(-15vh) scale(1.2); opacity: 0.4; } 75% { opacity: 0.6; } 100% { transform: translateY(10vh) scale(0.8); opacity: 0; } }
+        body::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: radial-gradient(var(--secondary-text) 0.5px, transparent 0.5px); background-size: 25px 25px; opacity: 0.1; /* Slightly more visible dots */ z-index: -1; animation: moveBackground 90s linear infinite; }
+        @keyframes moveBackground { from { background-position: 0 0; } to { background-position: 450px 450px; } }
+        .container { background: var(--container-bg); border: 1px solid var(--primary-color); border-radius: 15px; padding: 40px 45px; max-width: 700px; width: 100%; box-shadow: 0 0 30px var(--glow-color), 0 0 10px var(--primary-color) inset; text-align: center; position: relative; z-index: 1; animation: fadeInContainer 1.2s ease-out forwards; opacity: 0; transition: transform 0.4s ease, box-shadow 0.4s ease; }
+        .container:hover { transform: translateY(-5px) scale(1.01); box-shadow: 0 0 50px var(--glow-color), 0 0 15px var(--primary-color) inset, 0 5px 15px rgba(0,0,0,0.1); }
+        @keyframes fadeInContainer { from { opacity: 0; transform: translateY(25px); } to { opacity: 1; transform: translateY(0); } }
+        .header h1 { color: var(--primary-color); font-size: 2.8em; margin-bottom: 10px; text-shadow: 0 0 15px var(--glow-color); animation: pulseGlow 2.5s infinite alternate ease-in-out; }
+        @keyframes pulseGlow { from { text-shadow: 0 0 12px var(--glow-color); opacity: 0.9; } to { text-shadow: 0 0 22px var(--glow-color); opacity: 1; } }
+        .header p { color: var(--secondary-text); font-size: 1.15em; margin-bottom: 35px; }
 
-        #particles {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -2;
-        }
+        /* Status Check with specific structure */
+        .status-check { font-family: 'Roboto Mono', monospace; text-align: left; margin-bottom: 35px; border-left: 3px solid var(--primary-color); padding: 12px 18px; background: rgba(0,0,0, 0.15); border-radius: 0 5px 5px 0; }
+        .status-check p { margin: 10px 0; font-size: 0.98em; color: var(--secondary-text); opacity: 0; animation: slideIn 0.6s ease-out forwards; }
+        /* Assign specific delays based on final order */
+        .status-check p:nth-child(1) { animation-delay: 0.7s; } /* Cảm biến */
+        .status-check p:nth-child(2) { animation-delay: 1.0s; } /* Định vị */
+        .status-check p:nth-child(3) { animation-delay: 1.3s; } /* Thời gian */
+        .status-check p:nth-child(4) { animation-delay: 1.6s; } /* Phân tích */
+        .status-check p:nth-child(5) { animation-delay: 1.9s; } /* Trạng thái */
+        .status-check p:nth-child(6) { animation-delay: 2.2s; } /* Progress label */
+        @keyframes slideIn { from { opacity: 0; transform: translateX(-20px); } to { opacity: 1; transform: translateX(0); } }
+        .status-check strong { color: var(--primary-color); font-weight: 400; }
+        .status-check .status-ok { color: var(--status-ok-color); font-weight: bold; } /* Use Teal for OK */
 
-        .particle {
-            position: absolute;
-            background: var(--primary-color);
-            border-radius: 50%;
-            opacity: 0.5;
-            animation: float 12s infinite ease-in-out;
-        }
+        /* Progress Bar */
+        .progress-container { width: 100%; background: rgba(0, 0, 0, 0.3); border-radius: 5px; overflow: hidden; margin-top: 8px; opacity: 0; animation: fadeInProgress 0.5s ease-out 2.2s forwards; } /* Delay after label */
+        @keyframes fadeInProgress { from { opacity: 0; } to { opacity: 1; } }
+        .progress-bar { width: 0; height: 5px; background: var(--primary-color); animation: progress 1.5s ease-out forwards; animation-delay: 2.4s; } /* Delay after container */
+        @keyframes progress { from { width: 0; } to { width: 100%; } }
 
-        @keyframes float {
-            0% { transform: translateY(0) scale(1); opacity: 0.5; }
-            50% { transform: translateY(-40vh) scale(1.3); opacity: 0.2; }
-            100% { transform: translateY(0) scale(1); opacity: 0.5; }
-        }
+        /* Dynamic Content, Flirt, Icon CSS (no changes needed here, just adjust delays if needed) */
+        .dynamic-content { margin-bottom: 30px; opacity: 0; animation: fadeInContent 1s ease-out 3.9s forwards; text-align: left; font-size: 1.18em; line-height: 1.8; }
+        #dynamic-message-text p { margin-bottom: 15px; color: var(--text-color); }
+        #dynamic-poem-text { font-style: italic; color: var(--secondary-text); margin-top: 25px; text-align: center; font-size: 0.95em; border-top: 1px dashed var(--secondary-text); padding-top: 15px; }
+        #dynamic-poem-text strong { color: var(--primary-color); /* Use primary pink for poem highlight */ font-style: normal; }
+        @keyframes fadeInContent { from { opacity: 0; } to { opacity: 1; } }
+        .flirt-container { min-height: 40px; position: relative; margin-top: 20px; opacity: 0; animation: fadeInContent 1s ease-out 4.4s forwards; }
+        .flirt-line { font-style: italic; color: var(--secondary-text); font-size: 1.05em; position: absolute; width: 100%; left: 0; top: 0; opacity: 0; transition: opacity 1s ease; text-align: center; }
+        .flirt-line.active { opacity: 1; }
+        .icon { font-size: 2.5em; color: var(--primary-color); margin-top: 65px; display: inline-block; opacity: 0; cursor: pointer; animation: fadeInContent 1s ease-out 4.9s forwards, gentleBounce 2.8s infinite ease-in-out 4.9s; transition: transform 0.3s ease; }
+        .icon:hover { transform: scale(1.2) rotate(15deg); }
+        @keyframes gentleBounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
+        @media (max-width: 450px) { .container { padding: 25px 20px; } .header h1 { font-size: 2.2em; } .dynamic-content { font-size: 1.1em; } .flirt-line { font-size: 1em; } .icon { font-size: 2.2em; margin-top: 55px; } }
 
-        body::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: radial-gradient(var(--secondary-text) 0.5px, transparent 0.5px);
-            background-size: 20px 20px;
-            opacity: 0.1;
-            z-index: -1;
-            animation: moveBackground 80s linear infinite;
-        }
-
-        .container {
-            background: rgba(26, 26, 46, 0.9);
-            border: 1px solid var(--primary-color);
-            border-radius: 12px;
-            padding: 35px 40px;
-            max-width: 650px;
-            width: 100%;
-            box-shadow: 0 0 20px var(--glow-color), 0 0 5px var(--secondary-text) inset;
-            text-align: center;
-            position: relative;
-            animation: fadeIn 1.2s ease-out;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .container:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 0 30px var(--glow-color), 0 0 10px var(--primary-color) inset;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .header h1 {
-            color: var(--primary-color);
-            font-size: 2.5em;
-            margin-bottom: 10px;
-            text-shadow: 0 0 12px var(--glow-color);
-            animation: pulseGlow 2.5s infinite alternate ease-in-out;
-        }
-
-        @keyframes pulseGlow {
-            from { text-shadow: 0 0 10px var(--glow-color); opacity: 0.9; }
-            to { text-shadow: 0 0 18px var(--glow-color); opacity: 1; }
-        }
-
-        .header p {
-            color: var(--secondary-text);
-            font-size: 1.1em;
-            margin-bottom: 30px;
-            font-style: italic;
-        }
-
-        .status-check {
-            font-family: 'Roboto Mono', monospace;
-            text-align: left;
-            margin-bottom: 30px;
-            border-left: 3px solid var(--primary-color);
-            padding: 10px 15px;
-            background: rgba(0, 0, 0, 0.1);
-            border-radius: 0 5px 5px 0;
-        }
-
-        .status-check p {
-            margin: 8px 0;
-            font-size: 0.95em;
-            color: var(--secondary-text);
-            opacity: 0;
-            animation: slideIn 0.6s ease-out forwards;
-        }
-
-        .status-check p:nth-child(1) { animation-delay: 0.6s; }
-        .status-check p:nth-child(2) { animation-delay: 0.9s; }
-        .status-check p:nth-child(3) { animation-delay: 1.2s; }
-        .status-check p:nth-child(4) { animation-delay: 1.5s; }
-        .status-check p:nth-child(5) { animation-delay: 1.8s; }
-
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateX(-15px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-
-        .status-check strong {
-            color: var(--primary-color);
-            font-weight: 400;
-        }
-
-        .status-check .status-ok {
-            color: var(--soft-highlight);
-            font-weight: bold;
-        }
-
-        .progress-container {
-            width: 100%;
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 5px;
-            overflow: hidden;
-            margin-top: 10px;
-            opacity: 0;
-            animation: fadeIn 1s ease-out 1.8s forwards;
-        }
-
-        .progress-bar {
-            width: 0;
-            height: 5px;
-            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-            animation: progress 2s ease-in-out forwards;
-            animation-delay: 1.8s;
-        }
-
-        @keyframes progress {
-            from { width: 0; }
-            to { width: 100%; }
-        }
-
-        .message {
-            font-size: 1.2em;
-            line-height: 1.8;
-            margin-bottom: 30px;
-            color: var(--text-color);
-            opacity: 0;
-            animation: fadeIn 1s ease-out 2.2s forwards;
-        }
-
-        .flirt-container {
-            min-height: 100px;
-            position: relative;
-            margin: 20px 0;
-        }
-
-        .flirt-line {
-            font-style: italic;
-            color: var(--secondary-text);
-            font-size: 1.05em;
-            position: absolute;
-            width: 100%;
-            left: 0;
-            opacity: 0;
-            transition: opacity 1s ease;
-            line-height: 1.7;
-        }
-
-        .flirt-line.active {
-            opacity: 1;
-        }
-
-        .icon {
-            font-size: 2.2em;
-            color: var(--soft-highlight);
-            margin-top: 25px;
-            display: inline-block;
-            opacity: 0;
-            animation: fadeIn 1s ease-out 3.2s forwards, gentleBounce 2.5s infinite ease-in-out 3.2s;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-
-        .icon:hover {
-            transform: scale(1.2) rotate(15deg);
-        }
-
-        @keyframes gentleBounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-6px); }
-        }
-
-        @media (max-width: 400px) {
-            .container {
-                padding: 20px;
-            }
-            .header h1 {
-                font-size: 2em;
-            }
-            .message {
-                font-size: 1em;
-            }
-        }
     </style>
 </head>
 <body>
     <div id="particles"></div>
+
     <div class="container" role="main">
         <div class="header">
-            <h1 id="greeting-title">Chào Ngọc Quyên!</h1>
-            <p id="greeting-subtitle">Từ Bình Liêu đến Hải Hà, nụ cười ấy vẫn thế...</p>
+            <h1 id="greeting-title">Đang tải lời chào...</h1>
+            <p id="greeting-subtitle">...</p>
         </div>
 
         <div class="status-check">
-            <p id="sensor-line"><strong>[CẢM BIẾN]:</strong> Ghi nhận một tâm hồn đẹp...</p>
-            <p id="location-line"><strong>[ĐỊNH VỊ]:</strong> Người đẹp Bình Liêu <strong>Ngọc Quyên</strong> hiện tại <strong>Hải Hà</strong>.</p>
-            <p id="energy-line"><strong>[PHÂN TÍCH]:</strong> Năng lượng tích cực <span style="color: var(--soft-highlight);">+20%</span> ✨.</p>
-            <p id="status-line"><strong>[TRẠNG THÁI]:</strong> Không gian: <strong class="status-ok">Ấm Áp & Dịu Dàng</strong></p>
-            <p id="connection-line"><strong>[KẾT NỐI]:</strong> Giao hòa cùng thiên nhiên:</p>
-            <div class="progress-container">
+            <!-- Static Lines -->
+            <p><strong>[CẢM BIẾN]:</strong> Ghi nhận tín hiệu quen thuộc...</p>
+            <p><strong>[ĐỊNH VỊ]:</strong> Nguồn phát <strong>'Ngọc Quyên'</strong> đang ở <strong>Hải Hà</strong>.</p>
+            <!-- Dynamic Lines -->
+            <p id="current-time"><strong>[TIME]:</strong> --:--</p>
+            <p id="analysis-text"><strong>[PHÂN TÍCH]:</strong> Đang cảm nhận năng lượng...</p>
+            <p id="system-status"><strong>[TRẠNG THÁI]:</strong> Chuẩn bị...</p>
+            <!-- Progress -->
+            <p><strong>[PROGRESS]:</strong> Đồng bộ cảm hứng...</p>
+             <div class="progress-container">
                 <div class="progress-bar"></div>
             </div>
         </div>
 
-        <div class="message" id="main-message">
-            Hải Hà hôm nay đẹp hơn bởi có em ở đây, như bông hoa nở giữa biển trời.
-        </div>
-        
-        <div class="flirt-container">
-            <div class="flirt-line" id="flirt-message-1">"Mỗi khi em cười, Hải Hà như bừng sáng..."</div>
-            <div class="flirt-line" id="flirt-message-2">"Gió từ Bình Liêu mang theo hương sắc, em từ Hải Hà tỏa nắng ấm áp"</div>
-            <div class="flirt-line" id="flirt-message-3">"Có những nụ cười khiến lòng người ấm lại, như nắng mai trên sóng biển..."</div>
+        <div class="dynamic-content">
+            <div id="dynamic-message-text"><p>Một chút chờ đợi cho những điều dễ thương nhé...</p></div>
+            <div id="dynamic-poem-text">"..."</div>
         </div>
 
-        <div class="icon" aria-label="Trái tim lấp lánh">💖</div>
+        <div class="flirt-container">
+            <div class="flirt-line active">...</div>
+            <div class="flirt-line">...</div>
+            <div class="flirt-line">...</div>
+        </div>
+
+        <div class="icon" aria-label="Biểu tượng cảm xúc">😊</div>
     </div>
 
     <script>
-        // Particle Effect
+        // --- Particle Effect Script ---
         const particleContainer = document.getElementById('particles');
-        const numParticles = 20;
+        const numParticles = 25;
+        for (let i = 0; i < numParticles; i++) { const p = document.createElement('div'); p.classList.add('particle'); p.style.width = `${Math.random() * 4 + 1.5}px`; p.style.height = p.style.width; p.style.left = `${Math.random() * 100}vw`; p.style.top = `${Math.random() * 100}vh`; p.style.animationDuration = `${Math.random() * 5 + 7}s`; p.style.animationDelay = `${Math.random() * 7}s`; particleContainer.appendChild(p); }
+        // --- End Particle Script ---
 
-        for (let i = 0; i < numParticles; i++) {
-            const particle = document.createElement('div');
-            particle.classList.add('particle');
-            particle.style.width = `${Math.random() * 4 + 2}px`;
-            particle.style.height = particle.style.width;
-            particle.style.left = `${Math.random() * 100}vw`;
-            particle.style.top = `${Math.random() * 100}vh`;
-            particle.style.animationDelay = `${Math.random() * 6}s`;
-            particleContainer.appendChild(particle);
+        // --- Time & Content Logic ---
+        const now = new Date();
+        const hour = now.getHours();
+        const currentTimeString = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
+
+        let timeOfDay;
+        let timeEmoji;
+        let greetingVariations;
+        let mainMessages;
+        let rotatingThoughts;
+        let analysisOptions; // Random analysis lines
+        let statusOptions;   // Random status lines
+
+        // Define content based on time of day
+        // (Using the same content arrays as the previous version)
+        if (hour >= 5 && hour < 11) { // Morning
+            timeOfDay = "Buổi Sáng"; timeEmoji = "☀️";
+            greetingVariations = [ { title: `Chào Buổi Sáng, Quyên!`, subtitle: "Mong bạn một ngày mới thật nhiều năng lượng!" }, { title: `Ngày Mới Tốt Lành, Quyên ơi!`, subtitle: "Hãy bắt đầu ngày bằng một nụ cười nhé." }, { title: `Quyên Ơi, Dậy Chưa Nà?`, subtitle: "Mặt trời lên cao rồi đó, bạn yêu." } ];
+            mainMessages = [ { message: "Ánh nắng ban mai đang nhảy múa ngoài kia kìa! Chúc bạn một ngày thật <strong style='color: var(--primary-color);'>rạng rỡ</strong> và làm được nhiều điều bạn muốn nhé.", poem: "\"Nắng vàng trải nhẹ trên vai,<br> Chúc bạn ngày mới, <strong>thêm dài</strong> tiếng cười.\"" }, { message: "Một tách cà phê thơm, một bản nhạc hay, và lời chào này gửi đến bạn. Hãy để ngày mới bắt đầu thật <strong style='color: var(--primary-color);'>nhẹ nhàng</strong> và <strong style='color: var(--secondary-color);'>ngọt ngào</strong> nhé.", poem: "\"Sớm mai chim hót líu lo,<br> Chúc bạn vui vẻ, <strong>khỏi lo</strong> muộn phiền.\"" }, { message: "Thế giới ngoài kia đang chờ đợi nụ cười <strong style='color: var(--primary-color);'>tỏa nắng</strong> của bạn đó. Đừng giấu nó đi nha! Chúc bạn một buổi sáng thật hiệu quả và vui vẻ.", poem: "\"Mở lòng đón ánh bình minh,<br>Chúc bạn một ngày <strong>xinh đẹp</strong> như hoa.\"" } ];
+            rotatingThoughts = [ "Một nụ cười buổi sáng có thể thay đổi cả ngày đó!", "Đừng quên uống đủ nước nha bạn.", "Hít một hơi thật sâu... và bắt đầu thôi!", "Bạn của ngày hôm nay sẽ tuyệt vời hơn hôm qua.", "Nhớ dành thời gian cho bản thân một chút nhé." ];
+            analysisOptions = [ "Năng lượng 'tươi mới' đang được nạp.", "Cảm nhận sự 'an lành' đầu ngày.", "Chỉ số 'tích cực' tăng nhẹ.", "Không khí trong lành quá đi!" ];
+            statusOptions = [ "Sẵn sàng đón ngày mới!", "Khởi đầu thật nhẹ nhàng!", "Sẵn sàng tỏa sáng!", "Năng lượng tràn đầy!" ];
+        } else if (hour >= 11 && hour < 14) { // Noon
+            timeOfDay = "Buổi Trưa"; timeEmoji = "☀️";
+            greetingVariations = [ { title: `Trưa Rồi, Quyên ơi!`, subtitle: "Nghỉ ngơi nạp năng lượng chút nào." }, { title: `Chúc Quyên Buổi Trưa Vui Vẻ!`, subtitle: "Hy vọng bạn đang có bữa trưa ngon miệng." } ];
+            mainMessages = [ { message: "Giờ nghỉ trưa rồi! Tạm gác lại công việc, thư giãn một chút và ăn trưa thật ngon miệng nha bạn. Nạp đầy năng lượng để buổi chiều <strong style='color: var(--primary-color);'>bùng nổ</strong> nhé!", poem: "\"Nắng trưa đổ bóng hàng cây,<br> Bạn ơi nghỉ một lát <strong>này</strong> cho vui.\"" }, { message: "Dù bận rộn thế nào, cũng đừng quên dành cho mình một khoảng lặng buổi trưa nhé. Nghe một bài nhạc hay, đọc vài trang sách, hoặc đơn giản là nhắm mắt lại và hít thở. <strong style='color: var(--primary-color);'>Bình yên</strong> lắm đó.", poem: "\"Giờ trưa yên ả thanh bình,<br> Chúc bạn thư giãn, <strong>giữ gìn</strong> sức khoe.\"" } ];
+            rotatingThoughts = [ "Nghỉ ngơi một chút để đi được xa hơn.", "Một bữa trưa ngon miệng sẽ giúp bạn tỉnh táo hơn.", "Đừng làm việc quá sức nhé!", "Nghĩ về điều gì đó vui vẻ xem sao.", "Nửa ngày đã qua, nửa ngày nữa cố lên!" ];
+            analysisOptions = [ "Năng lượng 'ấm áp' giữa trưa.", "Cảm nhận sự 'thư thái' tạm thời.", "Chỉ số 'bình yên' ổn định.", "Mặt trời đang ở đỉnh điểm." ];
+            statusOptions = [ "Tạm dừng để tái tạo!", "Nạp pin cho buổi chiều!", "Giờ nghỉ ngơi!", "Thư giãn nào!" ];
+        } else if (hour >= 14 && hour < 18) { // Afternoon
+            timeOfDay = "Buổi Chiều"; timeEmoji = "🌤️";
+            greetingVariations = [ { title: `Buổi Chiều Êm ả, Quyên nhé!`, subtitle: "Sắp hết giờ làm rồi, cố lên bạn ơi!" }, { title: `Chào Buổi Chiều, Quyên!`, subtitle: "Mong bạn một buổi chiều thật hiệu quả và vui." } ];
+            mainMessages = [ { message: "Buổi chiều thường là lúc dễ mất tập trung nhất. Hãy thử đứng dậy vươn vai, uống một cốc nước mát, hoặc nhìn ra ngoài cửa sổ xem. Chút thay đổi nhỏ cũng giúp bạn <strong style='color: var(--primary-color);'>tỉnh táo</strong> hơn đó.", poem: "\"Chiều buông nắng nhạt bên thềm,<br> Chúc bạn mọi việc <strong>êm đềm</strong> trôi qua.\"" }, { message: "Sắp kết thúc một ngày làm việc rồi. Dù kết quả thế nào, bạn cũng đã cố gắng hết sức. Hãy tự thưởng cho mình một lời khen và chuẩn bị cho buổi tối <strong style='color: var(--primary-color);'>thư giãn</strong> nhé.", poem: "\"Hoàng hôn nhuộm tím chân trời,<br> Chúc bạn tan sở, <strong>thảnh thơi</strong> về nhà.\"" } ];
+            rotatingThoughts = [ "Sắp được về nhà rồi!", "Một chút nhạc nhẹ cho buổi chiều thêm chill.", "Nghĩ xem tối nay ăn gì ngon nhỉ?", "Bạn đã làm rất tốt hôm nay!", "Hoàn thành nốt việc cuối cùng nào!" ];
+            analysisOptions = [ "Năng lượng 'dịu nhẹ' cuối ngày.", "Cảm nhận sự 'thanh thản' dần đến.", "Chỉ số 'hoàn thành' đang tăng.", "Sắp đến giờ nghỉ ngơi." ];
+            statusOptions = [ "Hoàn thành nốt công việc!", "Sắp đến giờ tan làm!", "Chuẩn bị thư giãn!", "Cố lên chút nữa!" ];
+        } else { // Evening/Night
+            timeOfDay = "Buổi Tối"; timeEmoji = "🌙";
+            greetingVariations = [ { title: `Buổi Tối An Lành, Quyên nhé!`, subtitle: "Gác lại mọi bộn bề và thư giãn thôi nào." }, { title: `Chúc Quyên Ngủ Ngon!`, subtitle: "Mong bạn có những giấc mơ thật đẹp." } ];
+            mainMessages = [ { message: "Một ngày nữa đã qua. Hãy để những lo toan muộn phiền lại phía sau và tận hưởng buổi tối <strong style='color: var(--primary-color);'>yên bình</strong> bên những điều bạn yêu thích. Bạn xứng đáng được nghỉ ngơi.", poem: "\"Đêm về sao sáng đầy trời,<br> Chúc bạn ngon giấc, <strong>cuộc đời</strong> an yên.\"" }, { message: "Ánh đèn đường đã lên, không khí thật <strong style='color: var(--primary-color);'>dịu dàng</strong>. Đây là thời gian hoàn hảo để đọc một cuốn sách hay, xem một bộ phim ấm áp, hoặc trò chuyện cùng người thân yêu. Chúc bạn buổi tối thật <strong style='color: var(--secondary-color);'>thư thái</strong>.", poem: "\"Trăng treo trên mái hiên nhà,<br> Ngủ đi bạn nhé, <strong>mơ hoa</strong> đầy cành.\"" }, { message: "Đừng ôm đồm công việc hay suy nghĩ quá nhiều vào buổi tối nhé. Hãy để tâm trí được <strong style='color: var(--primary-color);'>nghỉ ngơi</strong> hoàn toàn. Một giấc ngủ sâu sẽ giúp bạn thức dậy sảng khoái vào ngày mai.", poem: "\"Gió khuya thổi nhẹ qua mành,<br> Ngủ đi bạn nhé, <strong>mộng lành</strong> tìm về.\"" } ];
+            rotatingThoughts = [ "Thư giãn và tận hưởng buổi tối của bạn.", "Một bản nhạc nhẹ nhàng sẽ giúp bạn dễ ngủ hơn.", "Gác lại lo âu, ngày mai lại bắt đầu.", "Bạn là tuyệt vời nhất!", "Ngủ thật ngon nhé!" ];
+            analysisOptions = [ "Không gian 'yên tĩnh' bao trùm.", "Cảm nhận sự 'bình yên' sâu lắng.", "Chỉ số 'thư giãn' ở mức cao.", "Thời gian để nghỉ ngơi." ];
+            statusOptions = [ "Đến giờ nghỉ ngơi!", "Nạp năng lượng cho ngày mai!", "Tận hưởng sự yên tĩnh!", "Thư giãn hoàn toàn!" ];
         }
 
-        // Time-based greeting
-        const hour = new Date().getHours();
-        let timeGreeting = "";
-        if (hour >= 5 && hour < 11) {
-            timeGreeting = "Buổi Sáng";
-        } else if (hour >= 11 && hour < 14) {
-            timeGreeting = "Buổi Trưa";
-        } else if (hour >= 14 && hour < 18) {
-            timeGreeting = "Buổi Chiều";
-        } else {
-            timeGreeting = "Buổi Tối";
-        }
+        // --- Apply Dynamic Content ---
+        const randomVariation = greetingVariations[Math.floor(Math.random() * greetingVariations.length)];
+        const randomMain = mainMessages[Math.floor(Math.random() * mainMessages.length)];
+        const randomAnalysis = analysisOptions[Math.floor(Math.random() * analysisOptions.length)];
+        const randomStatus = statusOptions[Math.floor(Math.random() * statusOptions.length)];
 
-        // Content variations with subtle romantic tone
-        const contentVariations = [
-            {
-                baseTitle: `Chào ${timeGreeting}, Ngọc Quyên!`,
-                subtitle: "Từ Bình Liêu đến Hải Hà, nụ cười ấy vẫn thế...",
-                message: "Hải Hà hôm nay đẹp hơn bởi có em ở đây, như bông hoa nở giữa biển trời."
-            },
-            {
-                baseTitle: `${timeGreeting} An Lành, Ngọc Quyên!`,
-                subtitle: "Người con gái Bình Liêu mang nắng đến Hải Hà",
-                message: "Em như làn gió mát từ Bình Liêu, làm dịu đi cái nắng Hải Hà."
-            },
-            {
-                baseTitle: `Ngọc Quyên Dịu Dàng!`,
-                subtitle: "Hải Hà thêm đẹp bởi nụ cười em",
-                message: "Mỗi ngày có em ở Hải Hà là một ngày biển xanh thêm rạng rỡ."
-            }
-        ];
 
-        // Nội dung ngẫu nhiên cho status-check
-        const statusContent = {
-            sensor: [
-                "Ghi nhận một tâm hồn đẹp...",
-                "Phát hiện nụ cười tỏa nắng...",
-                "Cảm nhận năng lượng tích cực..."
-            ],
-            location: [
-                "Người đẹp Bình Liêu <strong>Ngọc Quyên</strong> hiện tại <strong>Hải Hà</strong>.",
-                "Tín hiệu từ <strong>Ngọc Quyên</strong> đang ở <strong>Hải Hà</strong>.",
-                "Đang kết nối với <strong>Ngọc Quyên</strong> tại <strong>Hải Hà</strong>."
-            ],
-            energy: [
-                "Năng lượng tích cực <span style='color: var(--soft-highlight);'>+20%</span> ✨.",
-                "Sức sống lan tỏa <span style='color: var(--soft-highlight);'>+18%</span> 🌸.",
-                "Cảm xúc ấm áp <span style='color: var(--soft-highlight);'>+22%</span> 💫."
-            ],
-            status: [
-                "Ấm Áp & Dịu Dàng",
-                "Tươi Mới & Rạng Rỡ",
-                "Ngọt Ngào & Đáng Yêu"
-            ],
-            connection: [
-                "Giao hòa cùng thiên nhiên:",
-                "Kết nối với vũ trụ:",
-                "Hòa điệu cùng biển trời:"
-            ]
-        };
+        // Update Static & Dynamic Elements
+        document.getElementById('greeting-title').textContent = randomVariation.title;
+        document.getElementById('greeting-subtitle').textContent = randomVariation.subtitle;
+        document.getElementById('current-time').innerHTML = `<strong>[TIME]:</strong> ${currentTimeString} ${timeEmoji}`;
+        document.getElementById('analysis-text').innerHTML = `<strong>[PHÂN TÍCH]:</strong> ${randomAnalysis}`;
+        document.getElementById('system-status').innerHTML = `<strong>[TRẠNG THÁI]:</strong> <strong class="status-ok">${randomStatus}</strong>`;
+        document.title = randomVariation.title;
 
-        // Flirt messages with subtle romantic hints
-        const flirtMessages = [
-            "Mỗi khi em cười, Hải Hà như bừng sáng...",
-            "Gió từ Bình Liêu mang theo hương sắc, em từ Hải Hà tỏa nắng ấm áp",
-            "Có những nụ cười khiến lòng người ấm lại, como nắng mai trên sóng biển...",
-            "Em như bài thơ Bình Liêu viết giữa lòng Hải Hà",
-            "Nếu Hải Hà có mùa đông lạnh giá, thì em chính là nắng ấm xua tan điều ấy",
-            "Người ta bảo Hải Hà đẹp vì biển, nhưng với tôi, Hải Hà đẹp vì có em"
-        ];
+        document.getElementById('dynamic-message-text').innerHTML = `<p>${randomMain.message}</p>`;
+        document.getElementById('dynamic-poem-text').innerHTML = randomMain.poem;
 
-        // Chọn ngẫu nhiên nội dung cho status-check
-        function getRandomStatus() {
-            document.getElementById('sensor-line').innerHTML = `<strong>[CẢM BIẾN]:</strong> ${statusContent.sensor[Math.floor(Math.random() * statusContent.sensor.length)]}`;
-            document.getElementById('location-line').innerHTML = `<strong>[ĐỊNH VỊ]:</strong> ${statusContent.location[Math.floor(Math.random() * statusContent.location.length)]}`;
-            document.getElementById('energy-line').innerHTML = `<strong>[PHÂN TÍCH]:</strong> ${statusContent.energy[Math.floor(Math.random() * statusContent.energy.length)]}`;
-            
-            const randomStatus = statusContent.status[Math.floor(Math.random() * statusContent.status.length)];
-            document.getElementById('status-line').innerHTML = `<strong>[TRẠNG THÁI]:</strong> Không gian: <strong class="status-ok">${randomStatus}</strong>`;
-            
-            document.getElementById('connection-line').innerHTML = `<strong>[KẾT NỐI]:</strong> ${statusContent.connection[Math.floor(Math.random() * statusContent.connection.length)]}`;
-        }
+        // --- Rotating Thoughts Logic ---
+        const flirtContainer = document.querySelector('.flirt-container');
+        const flirtElements = flirtContainer.querySelectorAll('.flirt-line');
+        let currentThoughtIndex = 0;
+        let thoughtInterval;
 
-        // Select random content
-        const randomContent = contentVariations[Math.floor(Math.random() * contentVariations.length)];
-        
-        // Update content
-        document.getElementById('greeting-title').textContent = randomContent.baseTitle;
-        document.getElementById('greeting-subtitle').textContent = randomContent.subtitle;
-        document.getElementById('main-message').innerHTML = randomContent.message;
-        
-        // Set random status
-        getRandomStatus();
-
-        // Flirt message rotation
-        let currentFlirtIndex = 0;
-        const flirtElements = document.querySelectorAll('.flirt-line');
-
-        function rotateFlirtMessages() {
-            // Hide all
+        function showNextThought() {
             flirtElements.forEach(el => el.classList.remove('active'));
-            
-            // Show current
-            flirtElements[currentFlirtIndex % flirtElements.length].classList.add('active');
-            
-            // Update text for all elements
-            for (let i = 0; i < flirtElements.length; i++) {
-                const msgIndex = (currentFlirtIndex + i) % flirtMessages.length;
-                flirtElements[i].textContent = flirtMessages[msgIndex];
+            if (rotatingThoughts.length > 0 && flirtElements.length > 0) {
+                const messageIndex = currentThoughtIndex % rotatingThoughts.length;
+                const elementIndex = currentThoughtIndex % flirtElements.length;
+                flirtElements[elementIndex].textContent = rotatingThoughts[messageIndex];
+                flirtElements[elementIndex].classList.add('active');
+                currentThoughtIndex++;
             }
-            
-            currentFlirtIndex++;
-            setTimeout(rotateFlirtMessages, 5000);
         }
+        if (flirtElements.length > 0 && rotatingThoughts.length > 0) {
+            const thoughtStartTime = 4900 + 1000; // Adjusted start time after animations
+            setTimeout(() => { showNextThought(); thoughtInterval = setInterval(showNextThought, 6000); }, thoughtStartTime);
+        } else { flirtContainer.style.display = 'none'; }
+        // --- End Rotating Thoughts Logic ---
 
-        // Start animations
-        setTimeout(() => {
-            flirtElements[0].classList.add('active');
-            setTimeout(rotateFlirtMessages, 5000);
-            
-            // Animation delays for status check items
-            document.querySelectorAll('.status-check p').forEach((p, i) => {
-                p.style.animationDelay = `${0.6 + i * 0.3}s`;
-            });
-        }, 300);
+        // Random Icon
+        const iconElement = document.querySelector('.icon');
+        const icons = ['😊', '💖', '✨', '🌸', '🌟', '☀️', '🌙'];
+        iconElement.textContent = icons[Math.floor(Math.random() * icons.length)];
+
     </script>
 </body>
 </html>
