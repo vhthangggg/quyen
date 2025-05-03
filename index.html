@@ -3,29 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Lời Chào Đến Quyên!</title>
+    <title>Lời Chào Đặc Biệt!</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Roboto+Mono:wght@400&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* Reverted to Pink/Purple Scheme */
             --bg-color: #1a1a2e;
-            --primary-color: #ff7eb9; /* Vibrant Pink */
-            --secondary-color: #00f5d4; /* Vibrant Teal as secondary highlight */
+            --primary-color: #ff7eb9;
+            --secondary-color: #00f5d4;
             --text-color: #e6e6e6;
-            --secondary-text: #f0b6d1; /* Lighter pink for secondary text */
-            --glow-color: rgba(255, 126, 185, 0.5); /* Pink glow */
-            --particle-color: var(--primary-color); /* Pink particles */
+            --secondary-text: #f0b6d1;
+            --glow-color: rgba(255, 126, 185, 0.5);
+            --particle-color: var(--primary-color);
             --container-bg: rgba(26, 26, 46, 0.9);
-            --status-ok-color: var(--secondary-color); /* Use Teal for status OK */
+            --status-ok-color: var(--secondary-color);
         }
 
-        /* --- CSS cơ bản --- */
         body {
             background: var(--bg-color);
             font-family: 'Poppins', sans-serif;
-            color: var(--text -color);
+            color: var(--text-color);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -36,29 +34,7 @@
             box-sizing: border-box;
             position: relative;
         }
-        #particles {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            pointer-events: none;
-        }
-        .particle {
-            position: absolute;
-            background: var(--particle-color);
-            border-radius: 50%;
-            opacity: 0;
-            animation: float 10s infinite ease-in-out;
-        }
-        @keyframes float {
-            0% { transform: translateY(10vh) scale(0.8); opacity: 0; }
-            25% { opacity: 0.6; }
-            50% { transform: translateY(-15vh) scale(1.2); opacity: 0.4; }
-            75% { opacity: 0.6; }
-            100% { transform: translateY(10vh) scale(0.8); opacity: 0; }
-        }
+
         body::before {
             content: "";
             position: absolute;
@@ -72,10 +48,60 @@
             z-index: -1;
             animation: moveBackground 90s linear infinite;
         }
+
+        body::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, 
+                rgba(26, 26, 46, 0.8) 0%, 
+                rgba(58, 12, 163, 0.6) 50%, 
+                rgba(255, 126, 185, 0.4) 100%);
+            z-index: -2;
+            opacity: 0.5;
+            animation: gradientShift 15s ease infinite;
+            background-size: 200% 200%;
+        }
+
         @keyframes moveBackground {
             from { background-position: 0 0; }
             to { background-position: 450px 450px; }
         }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        #particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0;
+            animation: float 10s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(10vh) scale(0.8); opacity: 0; }
+            25% { opacity: 0.6; }
+            50% { transform: translateY(-15vh) scale(1.2); opacity: 0.4; }
+            75% { opacity: 0.6; }
+            100% { transform: translateY(10vh) scale(0.8); opacity: 0; }
+        }
+
         .container {
             background: var(--container-bg);
             border: 1px solid var(--primary-color);
@@ -92,14 +118,17 @@
             transition: transform 0.4s ease, box-shadow 0.4s ease;
             box-sizing: border-box;
         }
+
         .container:hover {
             transform: translateY(-3px) scale(1.01);
             box-shadow: 0 0 30px var(--glow-color), 0 0 10px var(--primary-color) inset, 0 3px 10px rgba(0,0,0,0.1);
         }
+
         @keyframes fadeInContainer {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
+
         .header h1 {
             color: var(--primary-color);
             font-size: 2em;
@@ -107,17 +136,18 @@
             text-shadow: 0 0 10px var(--glow-color);
             animation: pulseGlow 2.5s infinite alternate ease-in-out;
         }
+
         @keyframes pulseGlow {
             from { text-shadow: 0 0 8px var(--glow-color); opacity: 0.9; }
             to { text-shadow: 0 0 15px var(--glow-color); opacity: 1; }
         }
+
         .header p {
             color: var(--secondary-text);
             font-size: 1em;
             margin-bottom: 20px;
         }
 
-        /* Status Check */
         .status-check {
             font-family: 'Roboto Mono', monospace;
             text-align: left;
@@ -127,6 +157,7 @@
             background: rgba(0,0,0, 0.15);
             border-radius: 0 5px 5px 0;
         }
+
         .status-check p {
             margin: 8px 0;
             font-size: 0.9em;
@@ -134,26 +165,29 @@
             opacity: 0;
             animation: slideIn 0.6s ease-out forwards;
         }
+
         .status-check p:nth-child(1) { animation-delay: 0.7s; }
         .status-check p:nth-child(2) { animation-delay: 1.0s; }
         .status-check p:nth-child(3) { animation-delay: 1.3s; }
         .status-check p:nth-child(4) { animation-delay: 1.6s; }
         .status-check p:nth-child(5) { animation-delay: 1.9s; }
         .status-check p:nth-child(6) { animation-delay: 2.2s; }
+
         @keyframes slideIn {
             from { opacity: 0; transform: translateX(-15px); }
             to { opacity: 1; transform: translateX(0); }
         }
+
         .status-check strong {
             color: var(--primary-color);
             font-weight: 400;
         }
+
         .status-check .status-ok {
             color: var(--status-ok-color);
             font-weight: bold;
         }
 
-        /* Progress Bar */
         .progress-container {
             width: 100%;
             background: rgba(0, 0, 0, 0.3);
@@ -163,10 +197,12 @@
             opacity: 0;
             animation: fadeInProgress 0.5s ease-out 2.2s forwards;
         }
+
         @keyframes fadeInProgress {
             from { opacity: 0; }
             to { opacity: 1; }
         }
+
         .progress-bar {
             width: 0;
             height: 4px;
@@ -174,12 +210,12 @@
             animation: progress 1.5s ease-out forwards;
             animation-delay: 2.4s;
         }
+
         @keyframes progress {
             from { width: 0; }
             to { width: 100%; }
         }
 
-        /* Dynamic Content, Flirt, Icon */
         .dynamic-content {
             margin-bottom: 20px;
             opacity: 0;
@@ -188,10 +224,12 @@
             font-size: 1em;
             line-height: 1.6;
         }
+
         #dynamic-message-text p {
             margin-bottom: 12px;
             color: var(--text-color);
         }
+
         #dynamic-poem-text {
             font-style: italic;
             color: var(--secondary-text);
@@ -201,14 +239,78 @@
             border-top: 1px dashed var(--secondary-text);
             padding-top: 12px;
         }
+
         #dynamic-poem-text strong {
             color: var(--primary-color);
             font-style: normal;
         }
+
         @keyframes fadeInContent {
             from { opacity: 0; }
             to { opacity: 1; }
         }
+
+        .time-notification {
+            margin-top: 30px;
+            padding: 15px;
+            background: rgba(255, 126, 185, 0.1);
+            border-radius: 10px;
+            border-left: 3px solid var(--primary-color);
+            opacity: 0;
+            animation: fadeInContent 1s ease-out 5s forwards;
+        }
+
+        .time-slots {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+
+        .time-slot {
+            position: relative;
+            padding: 8px 12px;
+            margin: 5px;
+            background: rgba(0, 245, 212, 0.1);
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .time-slot:hover {
+            background: rgba(0, 245, 212, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .time-tooltip {
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(10px);
+            background: var(--container-bg);
+            color: var(--text-color);
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 0.8em;
+            white-space: nowrap;
+            pointer-events: none;
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 10;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .time-tooltip::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: var(--container-bg) transparent transparent transparent;
+        }
+
         .flirt-container {
             min-height: 30px;
             position: relative;
@@ -216,6 +318,7 @@
             opacity: 0;
             animation: fadeInContent 1s ease-out 4.4s forwards;
         }
+
         .flirt-line {
             font-style: italic;
             color: var(--secondary-text);
@@ -228,9 +331,11 @@
             transition: opacity 1s ease;
             text-align: center;
         }
+
         .flirt-line.active {
             opacity: 1;
         }
+
         .icon {
             font-size: 2em;
             color: var(--primary-color);
@@ -241,15 +346,42 @@
             animation: fadeInContent 1s ease-out 4.9s forwards, gentleBounce 2.8s infinite ease-in-out 4.9s;
             transition: transform 0.3s ease;
         }
+
         .icon:hover {
             transform: scale(1.2) rotate(10deg);
         }
+
         @keyframes gentleBounce {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-5px); }
         }
 
-        /* Media Queries cho iPhone 12 trở xuống iPhone 8 */
+        .typewriter {
+            border-right: 2px solid var(--primary-color);
+            animation: blink-caret 0.75s step-end infinite;
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: var(--primary-color); }
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: var(--primary-color);
+            opacity: 0;
+            z-index: 1000;
+            animation: confetti-fall 3s ease-in-out forwards;
+        }
+
+        @keyframes confetti-fall {
+            0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* Media Queries */
         @media (max-width: 414px) {
             body {
                 padding: 8px;
@@ -302,6 +434,13 @@
                 width: 2px;
                 height: 2px;
             }
+            .time-notification {
+                padding: 10px;
+            }
+            .time-slot {
+                padding: 6px 10px;
+                font-size: 0.9em;
+            }
         }
 
         @media (max-width: 375px) {
@@ -332,6 +471,10 @@
             .icon {
                 font-size: 1.6em;
                 margin-top: 25px;
+            }
+            .time-slot {
+                padding: 5px 8px;
+                font-size: 0.8em;
             }
         }
 
@@ -364,6 +507,10 @@
                 font-size: 1.5em;
                 margin-top: 20px;
             }
+            .time-slot {
+                padding: 4px 6px;
+                font-size: 0.75em;
+            }
         }
     </style>
 </head>
@@ -378,7 +525,7 @@
 
         <div class="status-check">
             <p><strong>[CẢM BIẾN]:</strong> Ghi nhận tín hiệu quen thuộc...</p>
-            <p><strong>[ĐỊNH VỊ]:</strong> Nguồn phát <strong>'Ngọc Quyên'</strong> đang ở <strong>Hải Hà</strong>.</p>
+            <p><strong>[ĐỊNH VỊ]:</strong> Nguồn phát đang ở <strong>Hải Hà</strong>.</p>
             <p id="current-time"><strong>[TIME]:</strong> --:--</p>
             <p id="analysis-text"><strong>[PHÂN TÍCH]:</strong> Đang cảm nhận năng lượng...</p>
             <p id="system-status"><strong>[TRẠNG THÁI]:</strong> Chuẩn bị...</p>
@@ -393,6 +540,16 @@
             <div id="dynamic-poem-text">"..."</div>
         </div>
 
+        <div class="time-notification">
+            <p>Mỗi khung giờ trong ngày đều có thông điệp đặc biệt dành riêng cho bạn!</p>
+            <div class="time-slots">
+                <span class="time-slot" data-time="morning">🌄 Buổi Sáng</span>
+                <span class="time-slot" data-time="noon">☀️ Buổi Trưa</span>
+                <span class="time-slot" data-time="afternoon">🌤️ Buổi Chiều</span>
+                <span class="time-slot" data-time="evening">🌙 Buổi Tối</span>
+            </div>
+        </div>
+
         <div class="flirt-container">
             <div class="flirt-line active">...</div>
             <div class="flirt-line">...</div>
@@ -405,17 +562,29 @@
     <script>
         // --- Particle Effect Script ---
         const particleContainer = document.getElementById('particles');
-        const numParticles = 15; // Giảm số lượng particle để tối ưu trên thiết bị di động
-        for (let i = 0; i < numParticles; i++) {
-            const p = document.createElement('div');
-            p.classList.add('particle');
-            p.style.width = `${Math.random() * 3 + 1}px`;
-            p.style.height = p.style.width;
-            p.style.left = `${Math.random() * 100}vw`;
-            p.style.top = `${Math.random() * 100}vh`;
-            p.style.animationDuration = `${Math.random() * 5 + 7}s`;
-            p.style.animationDelay = `${Math.random() * 7}s`;
-            particleContainer.appendChild(p);
+        
+        function createAdvancedParticles() {
+            const shapes = ['❤️', '⭐', '✦', '❀', '✧'];
+            for (let i = 0; i < 20; i++) {
+                const p = document.createElement('div');
+                p.classList.add('particle');
+                
+                if (Math.random() > 0.5) {
+                    p.style.width = `${Math.random() * 5 + 2}px`;
+                    p.style.height = p.style.width;
+                    p.style.background = `radial-gradient(circle, var(--primary-color), transparent)`;
+                } else {
+                    p.textContent = shapes[Math.floor(Math.random() * shapes.length)];
+                    p.style.fontSize = `${Math.random() * 10 + 10}px`;
+                    p.style.color = `hsl(${Math.random() * 60 + 300}, 100%, 70%)`;
+                }
+                
+                p.style.left = `${Math.random() * 100}vw`;
+                p.style.top = `${Math.random() * 100}vh`;
+                p.style.animationDuration = `${Math.random() * 10 + 5}s`;
+                p.style.animationDelay = `${Math.random() * 5}s`;
+                particleContainer.appendChild(p);
+            }
         }
 
         // --- Time & Content Logic ---
@@ -425,12 +594,7 @@
 
         let timeOfDay;
         let timeEmoji;
-        let greetingVariations;
-        let mainMessages;
-        let rotatingThoughts;
-        let analysisOptions;
-        let statusOptions;
-
+        
         if (hour >= 5 && hour < 11) {
             timeOfDay = "Buổi Sáng"; timeEmoji = "☀️";
             greetingVariations = [
@@ -552,52 +716,151 @@
             ];
         }
 
-        // --- Apply Dynamic Content ---
-        const randomVariation = greetingVariations[Math.floor(Math.random() * greetingVariations.length)];
-        const randomMain = mainMessages[Math.floor(Math.random() * mainMessages.length)];
-        const randomAnalysis = analysisOptions[Math.floor(Math.random() * analysisOptions.length)];
-        const randomStatus = statusOptions[Math.floor(Math.random() * statusOptions.length)];
 
-        document.getElementById('greeting-title').textContent = randomVariation.title;
-        document.getElementById('greeting-subtitle').textContent = randomVariation.subtitle;
-        document.getElementById('current-time').innerHTML = `<strong>[TIME]:</strong> ${currentTimeString} ${timeEmoji}`;
-        document.getElementById('analysis-text').innerHTML = `<strong>[PHÂN TÍCH]:</strong> ${randomAnalysis}`;
-        document.getElementById('system-status').innerHTML = `<strong>[TRẠNG THÁI]:</strong> <strong class="status-ok">${randomStatus}</strong>`;
-        document.title = randomVariation.title;
+        // --- TypeWriter Effect ---
+        function typeWriter(element, text, speed = 50) {
+            let i = 0;
+            element.innerHTML = '';
+            element.classList.add('typewriter');
+            
+            function typing() {
+                if (i < text.length) {
+                    element.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(typing, speed);
+                } else {
+                    element.classList.remove('typewriter');
+                }
+            }
+            typing();
+        }
 
-        document.getElementById('dynamic-message-text').innerHTML = `<p>${randomMain.message}</p>`;
-        document.getElementById('dynamic-poem-text').innerHTML = randomMain.poem;
+        // --- Confetti Effect ---
+        function createConfetti() {
+            const colors = ['#ff7eb9', '#00f5d4', '#ffcc00', '#7afcff', '#feff9c'];
+            for (let i = 0; i < 100; i++) {
+                const confetti = document.createElement('div');
+                confetti.classList.add('confetti');
+                confetti.style.left = `${Math.random() * 100}vw`;
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.animationDelay = `${Math.random() * 2}s`;
+                confetti.style.width = `${Math.random() * 10 + 5}px`;
+                confetti.style.height = `${Math.random() * 10 + 5}px`;
+                document.body.appendChild(confetti);
+                
+                setTimeout(() => {
+                    confetti.remove();
+                }, 3000);
+            }
+        }
 
-        // --- Rotating Thoughts Logic ---
-        const flirtContainer = document.querySelector('.flirt-container');
-        const flirtElements = flirtContainer.querySelectorAll('.flirt-line');
-        let currentThoughtIndex = 0;
-        let thoughtInterval;
+        // --- Weather API ---
+        async function fetchWeather() {
+            try {
+                const response = await fetch('https://api.open-meteo.com/v1/forecast?latitude=21.528&longitude=107.599&hourly=temperature_2m,precipitation_probability,dew_point_2m&timezone=Asia/Bangkok&forecast_days=1');
+                const data = await response.json();
+                
+                const currentHour = now.getHours();
+                const temp = data.hourly.temperature_2m[currentHour];
+                const rainProb = data.hourly.precipitation_probability[currentHour];
+                
+                const weatherElement = document.createElement('p');
+                weatherElement.innerHTML = `<strong>[THỜI TIẾT]:</strong> Hải Hà: ${temp}°C, ${rainProb}% mưa`;
+                document.querySelector('.status-check').appendChild(weatherElement);
+            } catch (error) {
+                console.error('Lỗi khi lấy dữ liệu thời tiết:', error);
+            }
+        }
 
-        function showNextThought() {
-            flirtElements.forEach(el => el.classList.remove('active'));
-            if (rotatingThoughts.length > 0 && flirtElements.length > 0) {
-                const messageIndex = currentThoughtIndex % rotatingThoughts.length;
+        // --- Parallax Effect ---
+        function setupParallax() {
+            const container = document.querySelector('.container');
+            window.addEventListener('scroll', () => {
+                const scrollPosition = window.pageYOffset;
+                container.style.transform = `translateY(${scrollPosition * 0.2}px)`;
+            });
+        }
+
+        // --- Time Tooltips ---
+        function setupTimeTooltips() {
+            const timeSlots = document.querySelectorAll('.time-slot');
+            const tooltipMessages = {
+                morning: "5h - 11h: Thông điệp tươi mới bắt đầu ngày",
+                noon: "11h - 14h: Lời nhắn giữa ngày đầy năng lượng",
+                afternoon: "14h - 18h: Động lực cuối giờ làm việc",
+                evening: "18h - 5h: Những lời chúc ngọt ngào buổi tối"
+            };
+            
+            timeSlots.forEach(slot => {
+                const time = slot.dataset.time;
+                const tooltip = document.createElement('div');
+                tooltip.className = 'time-tooltip';
+                tooltip.textContent = tooltipMessages[time];
+                slot.appendChild(tooltip);
+                
+                slot.addEventListener('mouseenter', () => {
+                    tooltip.style.opacity = '1';
+                    tooltip.style.transform = 'translateY(0)';
+                });
+                
+                slot.addEventListener('mouseleave', () => {
+                    tooltip.style.opacity = '0';
+                    tooltip.style.transform = 'translateY(10px)';
+                });
+            });
+        }
+
+        // --- Rotating Thoughts ---
+        function setupRotatingThoughts() {
+            const flirtContainer = document.querySelector('.flirt-container');
+            const flirtElements = flirtContainer.querySelectorAll('.flirt-line');
+            let currentThoughtIndex = 0;
+            
+            function showNextThought() {
+                flirtElements.forEach(el => el.classList.remove('active'));
                 const elementIndex = currentThoughtIndex % flirtElements.length;
-                flirtElements[elementIndex].textContent = rotatingThoughts[messageIndex];
                 flirtElements[elementIndex].classList.add('active');
                 currentThoughtIndex++;
             }
-        }
-        if (flirtElements.length > 0 && rotatingThoughts.length > 0) {
-            const thoughtStartTime = 4900 + 1000;
+            
             setTimeout(() => {
                 showNextThought();
-                thoughtInterval = setInterval(showNextThought, 6000);
-            }, thoughtStartTime);
-        } else {
-            flirtContainer.style.display = 'none';
+                setInterval(showNextThought, 6000);
+            }, 5900);
         }
 
         // --- Random Icon ---
-        const iconElement = document.querySelector('.icon');
-        const icons = ['😊', '💖', '✨', '🌸', '🌟', '☀️', '🌙'];
-        iconElement.textContent = icons[Math.floor(Math.random() * icons.length)];
+        function setupRandomIcon() {
+            const iconElement = document.querySelector('.icon');
+            const icons = ['😊', '💖', '✨', '🌸', '🌟', '☀️', '🌙'];
+            iconElement.textContent = icons[Math.floor(Math.random() * icons.length)];
+        }
+
+        // --- Initialize Everything ---
+        document.addEventListener('DOMContentLoaded', () => {
+            createAdvancedParticles();
+            setupParallax();
+            setupTimeTooltips();
+            setupRotatingThoughts();
+            setupRandomIcon();
+            
+            // Basic content setup
+            document.getElementById('current-time').innerHTML = `<strong>[TIME]:</strong> ${currentTimeString} ${timeEmoji}`;
+            document.title = `Lời Chào ${timeOfDay}!`;
+            
+            // Typewriter effects
+            typeWriter(document.getElementById('greeting-title'), `Chào ${timeOfDay}!`);
+            document.getElementById('greeting-subtitle').textContent = `Thông điệp đặc biệt dành cho bạn vào ${timeOfDay.toLowerCase()}`;
+            
+            // Delayed effects
+            setTimeout(() => {
+                document.getElementById('analysis-text').innerHTML = `<strong>[PHÂN TÍCH]:</strong> Năng lượng ${timeOfDay.toLowerCase()} đang được nạp.`;
+                document.getElementById('system-status').innerHTML = `<strong>[TRẠNG THÁI]:</strong> <strong class="status-ok">Sẵn sàng!</strong>`;
+            }, 1900);
+            
+            setTimeout(createConfetti, 4000);
+            setTimeout(fetchWeather, 3000);
+        });
     </script>
 </body>
 </html>
