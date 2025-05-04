@@ -3,23 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Lời Chào Đặc Biệt!</title>
+    <title>Lời Chào Đến Quyên!</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Roboto+Mono:wght@400&display=swap" rel="stylesheet">
     <style>
         :root {
+            /* Pink/Purple Color Scheme */
             --bg-color: #1a1a2e;
-            --primary-color: #ff7eb9;
-            --secondary-color: #00f5d4;
+            --primary-color: #ff7eb9; /* Vibrant Pink */
+            --secondary-color: #00f5d4; /* Vibrant Teal */
             --text-color: #e6e6e6;
-            --secondary-text: #f0b6d1;
+            --secondary-text: #f0b6d1; /* Lighter pink */
             --glow-color: rgba(255, 126, 185, 0.5);
             --particle-color: var(--primary-color);
             --container-bg: rgba(26, 26, 46, 0.9);
             --status-ok-color: var(--secondary-color);
         }
 
+        /* Base Styles */
         body {
             background: var(--bg-color);
             font-family: 'Poppins', sans-serif;
@@ -33,8 +35,10 @@
             padding: 10px;
             box-sizing: border-box;
             position: relative;
+            overflow-y: scroll;
         }
 
+        /* Advanced Background Effects */
         body::before {
             content: "";
             position: absolute;
@@ -42,33 +46,23 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: radial-gradient(var(--secondary-text) 0.5px, transparent 0.5px);
-            background-size: 25px 25px;
+            background-image: 
+                radial-gradient(var(--secondary-text) 0.5px, transparent 0.5px),
+                linear-gradient(45deg, 
+                    rgba(26, 26, 46, 0.8) 0%, 
+                    rgba(58, 12, 163, 0.6) 50%, 
+                    rgba(255, 126, 185, 0.4) 100%);
+            background-size: 25px 25px, 200% 200%;
             opacity: 0.1;
-            z-index: -1;
-            animation: moveBackground 90s linear infinite;
-        }
-
-        body::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, 
-                rgba(26, 26, 46, 0.8) 0%, 
-                rgba(58, 12, 163, 0.6) 50%, 
-                rgba(255, 126, 185, 0.4) 100%);
             z-index: -2;
-            opacity: 0.5;
-            animation: gradientShift 15s ease infinite;
-            background-size: 200% 200%;
+            animation: 
+                moveBackground 90s linear infinite,
+                gradientShift 15s ease infinite;
         }
 
         @keyframes moveBackground {
-            from { background-position: 0 0; }
-            to { background-position: 450px 450px; }
+            from { background-position: 0 0, 0% 50%; }
+            to { background-position: 450px 450px, 100% 50%; }
         }
 
         @keyframes gradientShift {
@@ -77,6 +71,7 @@
             100% { background-position: 0% 50%; }
         }
 
+        /* Particle Effects */
         #particles {
             position: absolute;
             top: 0;
@@ -92,6 +87,7 @@
             border-radius: 50%;
             opacity: 0;
             animation: float 10s infinite ease-in-out;
+            pointer-events: none;
         }
 
         @keyframes float {
@@ -102,6 +98,7 @@
             100% { transform: translateY(10vh) scale(0.8); opacity: 0; }
         }
 
+        /* Main Container */
         .container {
             background: var(--container-bg);
             border: 1px solid var(--primary-color);
@@ -109,19 +106,28 @@
             padding: 20px;
             max-width: 90%;
             width: 100%;
-            box-shadow: 0 0 20px var(--glow-color), 0 0 8px var(--primary-color) inset;
+            box-shadow: 
+                0 0 20px var(--glow-color), 
+                0 0 8px var(--primary-color) inset;
             text-align: center;
             position: relative;
             z-index: 1;
             animation: fadeInContainer 1.2s ease-out forwards;
             opacity: 0;
-            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            transition: 
+                transform 0.4s ease, 
+                box-shadow 0.4s ease;
             box-sizing: border-box;
+            margin: 20px 0;
+            backdrop-filter: blur(5px);
         }
 
         .container:hover {
             transform: translateY(-3px) scale(1.01);
-            box-shadow: 0 0 30px var(--glow-color), 0 0 10px var(--primary-color) inset, 0 3px 10px rgba(0,0,0,0.1);
+            box-shadow: 
+                0 0 30px var(--glow-color), 
+                0 0 10px var(--primary-color) inset, 
+                0 3px 10px rgba(0,0,0,0.1);
         }
 
         @keyframes fadeInContainer {
@@ -129,6 +135,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
+        /* Header Styles */
         .header h1 {
             color: var(--primary-color);
             font-size: 2em;
@@ -148,6 +155,7 @@
             margin-bottom: 20px;
         }
 
+        /* Status Check Section */
         .status-check {
             font-family: 'Roboto Mono', monospace;
             text-align: left;
@@ -172,6 +180,7 @@
         .status-check p:nth-child(4) { animation-delay: 1.6s; }
         .status-check p:nth-child(5) { animation-delay: 1.9s; }
         .status-check p:nth-child(6) { animation-delay: 2.2s; }
+        .status-check p:nth-child(7) { animation-delay: 2.5s; }
 
         @keyframes slideIn {
             from { opacity: 0; transform: translateX(-15px); }
@@ -188,6 +197,7 @@
             font-weight: bold;
         }
 
+        /* Progress Bar */
         .progress-container {
             width: 100%;
             background: rgba(0, 0, 0, 0.3);
@@ -216,6 +226,7 @@
             to { width: 100%; }
         }
 
+        /* Dynamic Content */
         .dynamic-content {
             margin-bottom: 20px;
             opacity: 0;
@@ -250,6 +261,7 @@
             to { opacity: 1; }
         }
 
+        /* Time Notification */
         .time-notification {
             margin-top: 30px;
             padding: 15px;
@@ -268,13 +280,13 @@
         }
 
         .time-slot {
-            position: relative;
             padding: 8px 12px;
             margin: 5px;
             background: rgba(0, 245, 212, 0.1);
             border-radius: 20px;
             cursor: pointer;
             transition: all 0.3s ease;
+            position: relative;
         }
 
         .time-slot:hover {
@@ -311,6 +323,12 @@
             border-color: var(--container-bg) transparent transparent transparent;
         }
 
+        .time-slot:hover .time-tooltip {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* Flirt Container */
         .flirt-container {
             min-height: 30px;
             position: relative;
@@ -336,6 +354,7 @@
             opacity: 1;
         }
 
+        /* Icon */
         .icon {
             font-size: 2em;
             color: var(--primary-color);
@@ -343,7 +362,9 @@
             display: inline-block;
             opacity: 0;
             cursor: pointer;
-            animation: fadeInContent 1s ease-out 4.9s forwards, gentleBounce 2.8s infinite ease-in-out 4.9s;
+            animation: 
+                fadeInContent 1s ease-out 4.9s forwards, 
+                gentleBounce 2.8s infinite ease-in-out 4.9s;
             transition: transform 0.3s ease;
         }
 
@@ -356,6 +377,7 @@
             50% { transform: translateY(-5px); }
         }
 
+        /* Typewriter Effect */
         .typewriter {
             border-right: 2px solid var(--primary-color);
             animation: blink-caret 0.75s step-end infinite;
@@ -366,6 +388,7 @@
             50% { border-color: var(--primary-color); }
         }
 
+        /* Confetti Effect */
         .confetti {
             position: absolute;
             width: 10px;
@@ -374,6 +397,7 @@
             opacity: 0;
             z-index: 1000;
             animation: confetti-fall 3s ease-in-out forwards;
+            pointer-events: none;
         }
 
         @keyframes confetti-fall {
@@ -381,7 +405,23 @@
             100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
         }
 
-        /* Media Queries */
+        /* Secret Message */
+        .secret-message {
+            margin-top: 20px;
+            font-size: 0.8em;
+            color: var(--secondary-text);
+            opacity: 0;
+            animation: fadeInContent 1s ease-out 6s forwards;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .secret-message:hover {
+            color: var(--primary-color);
+            transform: scale(1.02);
+        }
+
+        /* Responsive Design */
         @media (max-width: 414px) {
             body {
                 padding: 8px;
@@ -429,10 +469,6 @@
             .icon {
                 font-size: 1.8em;
                 margin-top: 30px;
-            }
-            .particle {
-                width: 2px;
-                height: 2px;
             }
             .time-notification {
                 padding: 10px;
@@ -525,8 +561,9 @@
 
         <div class="status-check">
             <p><strong>[CẢM BIẾN]:</strong> Ghi nhận tín hiệu quen thuộc...</p>
-            <p><strong>[ĐỊNH VỊ]:</strong> Nguồn phát đang ở <strong>Hải Hà</strong>.</p>
+            <p><strong>[ĐỊNH VỊ]:</strong> Nguồn phát <strong>'Ngọc Quyên'</strong> đang ở <strong>Hải Hà</strong>.</p>
             <p id="current-time"><strong>[TIME]:</strong> --:--</p>
+            <p id="weather-info"><strong>[THỜI TIẾT]:</strong> Đang cập nhật...</p>
             <p id="analysis-text"><strong>[PHÂN TÍCH]:</strong> Đang cảm nhận năng lượng...</p>
             <p id="system-status"><strong>[TRẠNG THÁI]:</strong> Chuẩn bị...</p>
             <p><strong>[PROGRESS]:</strong> Đồng bộ cảm hứng...</p>
@@ -557,26 +594,32 @@
         </div>
 
         <div class="icon" aria-label="Biểu tượng cảm xúc">😊</div>
+
+        <div class="secret-message" id="secret-message">
+            Nhấn vào đây để khám phá điều bí mật...
+        </div>
     </div>
 
     <script>
-        // --- Particle Effect Script ---
+        // Enhanced Particle System
         const particleContainer = document.getElementById('particles');
+        const shapes = ['❤️', '⭐', '✦', '❀', '✧', '♡', '✿', '❁'];
         
-        function createAdvancedParticles() {
-            const shapes = ['❤️', '⭐', '✦', '❀', '✧'];
-            for (let i = 0; i < 20; i++) {
+        function createParticles() {
+            for (let i = 0; i < 25; i++) {
                 const p = document.createElement('div');
                 p.classList.add('particle');
                 
-                if (Math.random() > 0.5) {
-                    p.style.width = `${Math.random() * 5 + 2}px`;
+                if (Math.random() > 0.6) {
+                    // Emoji particles
+                    p.textContent = shapes[Math.floor(Math.random() * shapes.length)];
+                    p.style.fontSize = `${Math.random() * 14 + 10}px`;
+                    p.style.color = `hsl(${Math.random() * 60 + 300}, 100%, 70%)`;
+                } else {
+                    // CSS particles
+                    p.style.width = `${Math.random() * 6 + 2}px`;
                     p.style.height = p.style.width;
                     p.style.background = `radial-gradient(circle, var(--primary-color), transparent)`;
-                } else {
-                    p.textContent = shapes[Math.floor(Math.random() * shapes.length)];
-                    p.style.fontSize = `${Math.random() * 10 + 10}px`;
-                    p.style.color = `hsl(${Math.random() * 60 + 300}, 100%, 70%)`;
                 }
                 
                 p.style.left = `${Math.random() * 100}vw`;
@@ -587,137 +630,7 @@
             }
         }
 
-        // --- Time & Content Logic ---
-        const now = new Date();
-        const hour = now.getHours();
-        const currentTimeString = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
-
-        let timeOfDay;
-        let timeEmoji;
-        
-        if (hour >= 5 && hour < 11) {
-            timeOfDay = "Buổi Sáng"; timeEmoji = "☀️";
-            greetingVariations = [
-                { title: `Chào Buổi Sáng, Quyên!`, subtitle: "Mong bạn một ngày mới thật nhiều năng lượng!" },
-                { title: `Ngày Mới Tốt Lành, Quyên ơi!`, subtitle: "Hãy bắt đầu ngày bằng một nụ cười nhé." },
-                { title: `Quyên Ơi, Dậy Chưa Nà?`, subtitle: "Mặt trời lên cao rồi đó, bạn yêu." }
-            ];
-            mainMessages = [
-                { message: "Ánh nắng ban mai đang nhảy múa ngoài kia kìa! Chúc bạn một ngày thật <strong style='color: var(--primary-color);'>rạng rỡ</strong> và làm được nhiều điều bạn muốn nhé.", poem: "\"Nắng vàng trải nhẹ trên vai,<br> Chúc bạn ngày mới, <strong>thêm dài</strong> tiếng cười.\"" },
-                { message: "Một tách cà phê thơm, một bản nhạc hay, và lời chào này gửi đến bạn. Hãy để ngày mới bắt đầu thật <strong style='color: var(--primary-color);'>nhẹ nhàng</strong> và <strong style='color: var(--secondary-color);'>ngọt ngào</strong> nhé.", poem: "\"Sớm mai chim hót líu lo,<br> Chúc bạn vui vẻ, <strong>khỏi lo</strong> muộn phiền.\"" },
-                { message: "Thế giới ngoài kia đang chờ đợi nụ cười <strong style='color: var(--primary-color);'>tỏa nắng</strong> của bạn đó. Đừng giấu nó đi nha! Chúc bạn một buổi sáng thật hiệu quả và vui vẻ.", poem: "\"Mở lòng đón ánh bình minh,<br>Chúc bạn một ngày <strong>xinh đẹp</strong> như hoa.\"" }
-            ];
-            rotatingThoughts = [
-                "Một nụ cười buổi sáng có thể thay đổi cả ngày đó!",
-                "Đừng quên uống đủ nước nha bạn.",
-                "Hít một hơi thật sâu... và bắt đầu thôi!",
-                "Bạn của ngày hôm nay sẽ tuyệt vời hơn hôm qua.",
-                "Nhớ dành thời gian cho bản thân một chút nhé."
-            ];
-            analysisOptions = [
-                "Năng lượng 'tươi mới' đang được nạp.",
-                "Cảm nhận sự 'an lành' đầu ngày.",
-                "Chỉ số 'tích cực' tăng nhẹ.",
-                "Không khí trong lành quá đi!"
-            ];
-            statusOptions = [
-                "Sẵn sàng đón ngày mới!",
-                "Khởi đầu thật nhẹ nhàng!",
-                "Sẵn sàng tỏa sáng!",
-                "Năng lượng tràn đầy!"
-            ];
-        } else if (hour >= 11 && hour < 14) {
-            timeOfDay = "Buổi Trưa"; timeEmoji = "☀️";
-            greetingVariations = [
-                { title: `Trưa Rồi, Quyên ơi!`, subtitle: "Nghỉ ngơi nạp năng lượng chút nào." },
-                { title: `Chúc Quyên Buổi Trưa Vui Vẻ!`, subtitle: "Hy vọng bạn đang có bữa trưa ngon miệng." }
-            ];
-            mainMessages = [
-                { message: "Giờ nghỉ trưa rồi! Tạm gác lại công việc, thư giãn một chút và ăn trưa thật ngon miệng nha bạn. Nạp đầy năng lượng để buổi chiều <strong style='color: var(--primary-color);'>bùng nổ</strong> nhé!", poem: "\"Nắng trưa đổ bóng hàng cây,<br> Bạn ơi nghỉ một lát <strong>này</strong> cho vui.\"" },
-                { message: "Dù bận rộn thế nào, cũng đừng quên dành cho mình một khoảng lặng buổi trưa nhé. Nghe một bài nhạc hay, đọc vài trang sách, hoặc đơn giản là nhắm mắt lại và hít thở. <strong style='color: var(--primary-color);'>Bình yên</strong> lắm đó.", poem: "\"Giờ trưa yên ả thanh bình,<br> Chúc bạn thư giãn, <strong>giữ gìn</strong> sức khoe.\"" }
-            ];
-            rotatingThoughts = [
-                "Nghỉ ngơi một chút để đi được xa hơn.",
-                "Một bữa trưa ngon miệng sẽ giúp bạn tỉnh táo hơn.",
-                "Đừng làm việc quá sức nhé!",
-                "Nghĩ về điều gì đó vui vẻ xem sao.",
-                "Nửa ngày đã qua, nửa ngày nữa cố lên!"
-            ];
-            analysisOptions = [
-                "Năng lượng 'ấm áp' giữa trưa.",
-                "Cảm nhận sự 'thư thái' tạm thời.",
-                "Chỉ số 'bình yên' ổn định.",
-                "Mặt trời đang ở đỉnh điểm."
-            ];
-            statusOptions = [
-                "Tạm dừng để tái tạo!",
-                "Nạp pin cho buổi chiều!",
-                "Giờ nghỉ ngơi!",
-                "Thư giãn nào!"
-            ];
-        } else if (hour >= 14 && hour < 18) {
-            timeOfDay = "Buổi Chiều"; timeEmoji = "🌤️";
-            greetingVariations = [
-                { title: `Buổi Chiều Êm ả, Quyên nhé!`, subtitle: "Sắp hết giờ làm rồi, cố lên bạn ơi!" },
-                { title: `Chào Buổi Chiều, Quyên!`, subtitle: "Mong bạn một buổi chiều thật hiệu quả và vui." }
-            ];
-            mainMessages = [
-                { message: "Buổi chiều thường là lúc dễ mất tập trung nhất. Hãy thử đứng dậy vươn vai, uống một cốc nước mát, hoặc nhìn ra ngoài cửa sổ xem. Chút thay đổi nhỏ cũng giúp bạn <strong style='color: var(--primary-color);'>tỉnh táo</strong> hơn đó.", poem: "\"Chiều buông nắng nhạt bên thềm,<br> Chúc bạn mọi việc <strong>êm đềm</strong> trôi qua.\"" },
-                { message: "Sắp kết thúc một ngày làm việc rồi. Dù kết quả thế nào, bạn cũng đã cố gắng hết sức. Hãy tự thưởng cho mình một lời khen và chuẩn bị cho buổi tối <strong style='color: var(--primary-color);'>thư giãn</strong> nhé.", poem: "\"Hoàng hôn nhuộm tím chân trời,<br> Chúc bạn tan sở, <strong>thảnh thơi</strong> về nhà.\"" }
-            ];
-            rotatingThoughts = [
-                "Sắp được về nhà rồi!",
-                "Một chút nhạc nhẹ cho buổi chiều thêm chill.",
-                "Nghĩ xem tối nay ăn gì ngon nhỉ?",
-                "Bạn đã làm rất tốt hôm nay!",
-                "Hoàn thành nốt việc cuối cùng nào!"
-            ];
-            analysisOptions = [
-                "Năng lượng 'dịu nhẹ' cuối ngày.",
-                "Cảm nhận sự 'thanh thản' dần đến.",
-                "Chỉ số 'hoàn thành' đang tăng.",
-                "Sắp đến giờ nghỉ ngơi."
-            ];
-            statusOptions = [
-                "Hoàn thành nốt công việc!",
-                "Sắp đến giờ tan làm!",
-                "Chuẩn bị thư giãn!",
-                "Cố lên chút nữa!"
-            ];
-        } else {
-            timeOfDay = "Buổi Tối"; timeEmoji = "🌙";
-            greetingVariations = [
-                { title: `Buổi Tối An Lành, Quyên nhé!`, subtitle: "Gác lại mọi bộn bề và thư giãn thôi nào." },
-                { title: `Chúc Quyên Ngủ Ngon!`, subtitle: "Mong bạn có những giấc mơ thật đẹp." }
-            ];
-            mainMessages = [
-                { message: "Một ngày nữa đã qua. Hãy để những lo toan muộn phiền lại phía sau và tận hưởng buổi tối <strong style='color: var(--primary-color);'>yên bình</strong> bên những điều bạn yêu thích. Bạn xứng đáng được nghỉ ngơi.", poem: "\"Đêm về sao sáng đầy trời,<br> Chúc bạn ngon giấc, <strong>cuộc đời</strong> an yên.\"" },
-                { message: "Ánh đèn đường đã lên, không khí thật <strong style='color: var(--primary-color);'>dịu dàng</strong>. Đây là thời gian hoàn hảo để đọc một cuốn sách hay, xem một bộ phim ấm áp, hoặc trò chuyện cùng người thân yêu. Chúc bạn buổi tối thật <strong style='color: var(--secondary-color);'>thư thái</strong>.", poem: "\"Trăng treo trên mái hiên nhà,<br> Ngủ đi bạn nhé, <strong>mơ hoa</strong> đầy cành.\"" },
-                { message: "Đừng ôm đồm công việc hay suy nghĩ quá nhiều vào buổi tối nhé. Hãy để tâm trí được <strong style='color: var(--primary-color);'>nghỉ ngơi</strong> hoàn toàn. Một giấc ngủ sâu sẽ giúp bạn thức dậy sảng khoái vào ngày mai.", poem: "\"Gió khuya thổi nhẹ qua mành,<br> Ngủ đi bạn nhé, <strong>mộng lành</strong> tìm về.\"" }
-            ];
-            rotatingThoughts = [
-                "Thư giãn và tận hưởng buổi tối của bạn.",
-                "Một bản nhạc nhẹ nhàng sẽ giúp bạn dễ ngủ hơn.",
-                "Gác lại lo âu, ngày mai lại bắt đầu.",
-                "Bạn là tuyệt vời nhất!",
-                "Ngủ thật ngon nhé!"
-            ];
-            analysisOptions = [
-                "Không gian 'yên tĩnh' bao trùm.",
-                "Cảm nhận sự 'bình yên' sâu lắng.",
-                "Chỉ số 'thư giãn' ở mức cao.",
-                "Thời gian để nghỉ ngơi."
-            ];
-            statusOptions = [
-                "Đến giờ nghỉ ngơi!",
-                "Nạp năng lượng cho ngày mai!",
-                "Tận hưởng sự yên tĩnh!",
-                "Thư giãn hoàn toàn!"
-            ];
-        }
-
-
-        // --- TypeWriter Effect ---
+        // Typewriter Effect
         function typeWriter(element, text, speed = 50) {
             let i = 0;
             element.innerHTML = '';
@@ -735,10 +648,10 @@
             typing();
         }
 
-        // --- Confetti Effect ---
+        // Confetti Effect
         function createConfetti() {
-            const colors = ['#ff7eb9', '#00f5d4', '#ffcc00', '#7afcff', '#feff9c'];
-            for (let i = 0; i < 100; i++) {
+            const colors = ['#ff7eb9', '#00f5d4', '#ffcc00', '#7afcff', '#feff9c', '#ff65a3', '#7e88ff'];
+            for (let i = 0; i < 120; i++) {
                 const confetti = document.createElement('div');
                 confetti.classList.add('confetti');
                 confetti.style.left = `${Math.random() * 100}vw`;
@@ -754,25 +667,34 @@
             }
         }
 
-        // --- Weather API ---
+        // Weather API
         async function fetchWeather() {
             try {
-                const response = await fetch('https://api.open-meteo.com/v1/forecast?latitude=21.528&longitude=107.599&hourly=temperature_2m,precipitation_probability,dew_point_2m&timezone=Asia/Bangkok&forecast_days=1');
+                const response = await fetch('https://api.open-meteo.com/v1/forecast?latitude=21.528&longitude=107.599&hourly=temperature_2m,precipitation_probability,weathercode&timezone=Asia/Bangkok&forecast_days=1');
                 const data = await response.json();
                 
+                const now = new Date();
                 const currentHour = now.getHours();
                 const temp = data.hourly.temperature_2m[currentHour];
                 const rainProb = data.hourly.precipitation_probability[currentHour];
+                const weatherCode = data.hourly.weathercode[currentHour];
                 
-                const weatherElement = document.createElement('p');
-                weatherElement.innerHTML = `<strong>[THỜI TIẾT]:</strong> Hải Hà: ${temp}°C, ${rainProb}% mưa`;
-                document.querySelector('.status-check').appendChild(weatherElement);
+                let weatherDesc = '';
+                if (weatherCode === 0) weatherDesc = '☀️ Trời nắng';
+                else if (weatherCode < 50) weatherDesc = '⛅ Trời nhiều mây';
+                else if (weatherCode < 70) weatherDesc = '🌧️ Có mưa';
+                else weatherDesc = '❄️ Có tuyết';
+                
+                document.getElementById('weather-info').innerHTML = 
+                    `<strong>[THỜI TIẾT]:</strong> Hải Hà: ${temp}°C, ${rainProb}% mưa, ${weatherDesc}`;
             } catch (error) {
                 console.error('Lỗi khi lấy dữ liệu thời tiết:', error);
+                document.getElementById('weather-info').innerHTML = 
+                    `<strong>[THỜI TIẾT]:</strong> Hải Hà: Dữ liệu thời tiết tạm thời không khả dụng`;
             }
         }
 
-        // --- Parallax Effect ---
+        // Parallax Effect
         function setupParallax() {
             const container = document.querySelector('.container');
             window.addEventListener('scroll', () => {
@@ -781,7 +703,7 @@
             });
         }
 
-        // --- Time Tooltips ---
+        // Time Tooltips
         function setupTimeTooltips() {
             const timeSlots = document.querySelectorAll('.time-slot');
             const tooltipMessages = {
@@ -797,69 +719,256 @@
                 tooltip.className = 'time-tooltip';
                 tooltip.textContent = tooltipMessages[time];
                 slot.appendChild(tooltip);
-                
-                slot.addEventListener('mouseenter', () => {
-                    tooltip.style.opacity = '1';
-                    tooltip.style.transform = 'translateY(0)';
-                });
-                
-                slot.addEventListener('mouseleave', () => {
-                    tooltip.style.opacity = '0';
-                    tooltip.style.transform = 'translateY(10px)';
-                });
             });
         }
 
-        // --- Rotating Thoughts ---
-        function setupRotatingThoughts() {
+        // Secret Message
+        function setupSecretMessage() {
+            const secretMessages = [
+                "Bạn biết không? Mỗi khi bạn cười, thế giới này đẹp hơn một chút.",
+                "Có một điều bí mật: Bạn chính là nguồn cảm hứng đặc biệt!",
+                "Nhắm mắt lại và nghĩ về điều hạnh phúc nhất... đó chính là bạn đấy!",
+                "Nếu tôi có thể gửi một món quà, đó sẽ là một cái ôm ấm áp dành cho bạn.",
+                "Bạn có biết vì sao mặt trời tỏa nắng? Vì nó muốn chiếu sáng cho người đặc biệt như bạn!"
+            ];
+            
+            const secretElement = document.getElementById('secret-message');
+            let clickCount = 0;
+            
+            secretElement.addEventListener('click', () => {
+                clickCount++;
+                if (clickCount <= 3) {
+                    secretElement.textContent = secretMessages[Math.floor(Math.random() * secretMessages.length)];
+                } else if (clickCount === 4) {
+                    secretElement.textContent = "Bạn thật kiên nhẫn! Đây là phần thưởng đặc biệt: Một ngày tuyệt vời đang chờ bạn!";
+                } else {
+                    secretElement.textContent = "Bạn đã khám phá hết mọi bí mật rồi đó! ❤️";
+                }
+                
+                // Small animation
+                secretElement.style.transform = 'scale(1.1)';
+                setTimeout(() => {
+                    secretElement.style.transform = 'scale(1)';
+                }, 300);
+            });
+        }
+
+        // Main Content Setup
+        document.addEventListener('DOMContentLoaded', () => {
+            const now = new Date();
+            const hour = now.getHours();
+            const currentTimeString = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
+
+            let timeOfDay;
+            let timeEmoji;
+            let greetingVariations;
+            let mainMessages;
+            let rotatingThoughts;
+            let analysisOptions;
+            let statusOptions;
+
+            // Enhanced Messages for Each Time Period
+            if (hour >= 5 && hour < 11) {
+                timeOfDay = "Buổi Sáng"; timeEmoji = "☀️";
+                greetingVariations = [
+                    { title: `Chào Buổi Sáng, Quyên!`, subtitle: "Mong bạn một ngày mới thật nhiều năng lượng!" },
+                    { title: `Ngày Mới Tốt Lành, Quyên ơi!`, subtitle: "Hãy bắt đầu ngày bằng một nụ cười nhé." },
+                    { title: `Quyên Ơi, Dậy Chưa Nà?`, subtitle: "Mặt trời lên cao rồi đó, bạn yêu." },
+                    { title: `Bình Minh Đẹp Nhất Khi Có Em!`, subtitle: "Chúc em ngày mới tràn đầy niềm vui!" }
+                ];
+                mainMessages = [
+                    { message: "Ánh nắng ban mai đang nhảy múa ngoài kia kìa! Chúc bạn một ngày thật <strong style='color: var(--primary-color);'>rạng rỡ</strong> và làm được nhiều điều bạn muốn nhé.", poem: "\"Nắng vàng trải nhẹ trên vai,<br> Chúc bạn ngày mới, <strong>thêm dài</strong> tiếng cười.\"" },
+                    { message: "Một tách cà phê thơm, một bản nhạc hay, và lời chào này gửi đến bạn. Hãy để ngày mới bắt đầu thật <strong style='color: var(--primary-color);'>nhẹ nhàng</strong> và <strong style='color: var(--secondary-color);'>ngọt ngào</strong> nhé.", poem: "\"Sớm mai chim hót líu lo,<br> Chúc bạn vui vẻ, <strong>khỏi lo</strong> muộn phiền.\"" },
+                    { message: "Thế giới ngoài kia đang chờ đợi nụ cười <strong style='color: var(--primary-color);'>tỏa nắng</strong> của bạn đó. Đừng giấu nó đi nha! Chúc bạn một buổi sáng thật hiệu quả và vui vẻ.", poem: "\"Mở lòng đón ánh bình minh,<br>Chúc bạn một ngày <strong>xinh đẹp</strong> như hoa.\"" },
+                    { message: "Mỗi buổi sáng là một trang mới trong cuốn sách cuộc đời. Hãy viết lên đó những điều <strong style='color: var(--primary-color);'>tươi đẹp</strong> nhất nhé!", poem: "\"Sương mai đọng giọt long lanh,<br>Chúc em ngày mới <strong>an lành</strong>, yêu thương.\"" }
+                ];
+                rotatingThoughts = [
+                    "Một nụ cười buổi sáng có thể thay đổi cả ngày đó!",
+                    "Đừng quên uống đủ nước nha bạn.",
+                    "Hít một hơi thật sâu... và bắt đầu thôi!",
+                    "Bạn của ngày hôm nay sẽ tuyệt vời hơn hôm qua.",
+                    "Nhớ dành thời gian cho bản thân một chút nhé.",
+                    "Hôm nay bạn trông thật rạng rỡ!",
+                    "Ngày mới là cơ hội mới để tỏa sáng!"
+                ];
+                analysisOptions = [
+                    "Năng lượng 'tươi mới' đang được nạp.",
+                    "Cảm nhận sự 'an lành' đầu ngày.",
+                    "Chỉ số 'tích cực' tăng nhẹ.",
+                    "Không khí trong lành quá đi!",
+                    "Tâm trạng 'phấn chấn' được ghi nhận."
+                ];
+                statusOptions = [
+                    "Sẵn sàng đón ngày mới!",
+                    "Khởi đầu thật nhẹ nhàng!",
+                    "Sẵn sàng tỏa sáng!",
+                    "Năng lượng tràn đầy!",
+                    "Chào ngày mới với nụ cười!"
+                ];
+            } else if (hour >= 11 && hour < 14) {
+                timeOfDay = "Buổi Trưa"; timeEmoji = "☀️";
+                greetingVariations = [
+                    { title: `Trưa Rồi, Quyên ơi!`, subtitle: "Nghỉ ngơi nạp năng lượng chút nào." },
+                    { title: `Chúc Quyên Buổi Trưa Vui Vẻ!`, subtitle: "Hy vọng bạn đang có bữa trưa ngon miệng." },
+                    { title: `Giữa Trưa Nắng Đẹp!`, subtitle: "Nhớ nghỉ ngơi một chút nhé Quyên." }
+                ];
+                mainMessages = [
+                    { message: "Giờ nghỉ trưa rồi! Tạm gác lại công việc, thư giãn một chút và ăn trưa thật ngon miệng nha bạn. Nạp đầy năng lượng để buổi chiều <strong style='color: var(--primary-color);'>bùng nổ</strong> nhé!", poem: "\"Nắng trưa đổ bóng hàng cây,<br> Bạn ơi nghỉ một lát <strong>này</strong> cho vui.\"" },
+                    { message: "Dù bận rộn thế nào, cũng đừng quên dành cho mình một khoảng lặng buổi trưa nhé. Nghe một bài nhạc hay, đọc vài trang sách, hoặc đơn giản là nhắm mắt lại và hít thở. <strong style='color: var(--primary-color);'>Bình yên</strong> lắm đó.", poem: "\"Giờ trưa yên ả thanh bình,<br> Chúc bạn thư giãn, <strong>giữ gìn</strong> sức khoe.\"" },
+                    { message: "Buổi trưa là khoảng thời gian tuyệt vời để <strong style='color: var(--primary-color);'>tái tạo</strong> năng lượng. Hãy thưởng cho mình những phút giây thư giãn xứng đáng nhé!", poem: "\"Nắng trưa vàng óng trên tường,<br>Chúc em nghỉ ngơi, <strong>vấn vương</strong> niềm vui.\"" }
+                ];
+                rotatingThoughts = [
+                    "Nghỉ ngơi một chút để đi được xa hơn.",
+                    "Một bữa trưa ngon miệng sẽ giúp bạn tỉnh táo hơn.",
+                    "Đừng làm việc quá sức nhé!",
+                    "Nghĩ về điều gì đó vui vẻ xem sao.",
+                    "Nửa ngày đã qua, nửa ngày nữa cố lên!",
+                    "Bạn đang làm rất tốt!",
+                    "Nhớ ngồi thẳng lưng khi làm việc nha!"
+                ];
+                analysisOptions = [
+                    "Năng lượng 'ấm áp' giữa trưa.",
+                    "Cảm nhận sự 'thư thái' tạm thời.",
+                    "Chỉ số 'bình yên' ổn định.",
+                    "Mặt trời đang ở đỉnh điểm.",
+                    "Cần bổ sung 'năng lượng' cho buổi chiều."
+                ];
+                statusOptions = [
+                    "Tạm dừng để tái tạo!",
+                    "Nạp pin cho buổi chiều!",
+                    "Giờ nghỉ ngơi!",
+                    "Thư giãn nào!",
+                    "Nghỉ trưa vui vẻ!"
+                ];
+            } else if (hour >= 14 && hour < 18) {
+                timeOfDay = "Buổi Chiều"; timeEmoji = "🌤️";
+                greetingVariations = [
+                    { title: `Buổi Chiều Êm ả, Quyên nhé!`, subtitle: "Sắp hết giờ làm rồi, cố lên bạn ơi!" },
+                    { title: `Chào Buổi Chiều, Quyên!`, subtitle: "Mong bạn một buổi chiều thật hiệu quả và vui." },
+                    { title: `Chiều Lành Gió Mát!`, subtitle: "Chúc Quyên buổi chiều làm việc hiệu quả!" }
+                ];
+                mainMessages = [
+                    { message: "Buổi chiều thường là lúc dễ mất tập trung nhất. Hãy thử đứng dậy vươn vai, uống một cốc nước mát, hoặc nhìn ra ngoài cửa sổ xem. Chút thay đổi nhỏ cũng giúp bạn <strong style='color: var(--primary-color);'>tỉnh táo</strong> hơn đó.", poem: "\"Chiều buông nắng nhạt bên thềm,<br> Chúc bạn mọi việc <strong>êm đềm</strong> trôi qua.\"" },
+                    { message: "Sắp kết thúc một ngày làm việc rồi. Dù kết quả thế nào, bạn cũng đã cố gắng hết sức. Hãy tự thưởng cho mình một lời khen và chuẩn bị cho buổi tối <strong style='color: var(--primary-color);'>thư giãn</strong> nhé.", poem: "\"Hoàng hôn nhuộm tím chân trời,<br>Chúc bạn tan sở, <strong>thảnh thơi</strong> về nhà.\"" },
+                    { message: "Buổi chiều là thời điểm hoàn thành những <strong style='color: var(--primary-color);'>công việc cuối</strong> cùng. Bạn đã làm rất tốt rồi, chỉ cần thêm chút nữa thôi!", poem: "\"Nắng chiều vàng nhạt bờ tre,<br>Chúc em hoàn thành <strong>mọi bề</strong> công viêc.\"" }
+                ];
+                rotatingThoughts = [
+                    "Sắp được về nhà rồi!",
+                    "Một chút nhạc nhẹ cho buổi chiều thêm chill.",
+                    "Nghĩ xem tối nay ăn gì ngon nhỉ?",
+                    "Bạn đã làm rất tốt hôm nay!",
+                    "Hoàn thành nốt việc cuối cùng nào!",
+                    "Nhớ uống nước đầy đủ nha!",
+                    "Bạn xứng đáng được nghỉ ngơi rồi đó!"
+                ];
+                analysisOptions = [
+                    "Năng lượng 'dịu nhẹ' cuối ngày.",
+                    "Cảm nhận sự 'thanh thản' dần đến.",
+                    "Chỉ số 'hoàn thành' đang tăng.",
+                    "Sắp đến giờ nghỉ ngơi.",
+                    "Tâm trạng 'mong chờ' được ghi nhận."
+                ];
+                statusOptions = [
+                    "Hoàn thành nốt công việc!",
+                    "Sắp đến giờ tan làm!",
+                    "Chuẩn bị thư giãn!",
+                    "Cố lên chút nữa!",
+                    "Bạn sắp xong rồi!"
+                ];
+            } else {
+                timeOfDay = "Buổi Tối"; timeEmoji = "🌙";
+                greetingVariations = [
+                    { title: `Buổi Tối An Lành, Quyên nhé!`, subtitle: "Gác lại mọi bộn bề và thư giãn thôi nào." },
+                    { title: `Chúc Quyên Ngủ Ngon!`, subtitle: "Mong bạn có những giấc mơ thật đẹp." },
+                    { title: `Đêm Về Sao Sáng!`, subtitle: "Chúc em buổi tối thật ấm áp!" }
+                ];
+                mainMessages = [
+                    { message: "Một ngày nữa đã qua. Hãy để những lo toan muộn phiền lại phía sau và tận hưởng buổi tối <strong style='color: var(--primary-color);'>yên bình</strong> bên những điều bạn yêu thích. Bạn xứng đáng được nghỉ ngơi.", poem: "\"Đêm về sao sáng đầy trời,<br> Chúc bạn ngon giấc, <strong>cuộc đời</strong> an yên.\"" },
+                    { message: "Ánh đèn đường đã lên, không khí thật <strong style='color: var(--primary-color);'>dịu dàng</strong>. Đây là thời gian hoàn hảo để đọc một cuốn sách hay, xem một bộ phim ấm áp, hoặc trò chuyện cùng người thân yêu. Chúc bạn buổi tối thật <strong style='color: var(--secondary-color);'>thư thái</strong>.", poem: "\"Trăng treo trên mái hiên nhà,<br> Ngủ đi bạn nhé, <strong>mơ hoa</strong> đầy cành.\"" },
+                    { message: "Đừng ôm đồm công việc hay suy nghĩ quá nhiều vào buổi tối nhé. Hãy để tâm trí được <strong style='color: var(--primary-color);'>nghỉ ngơi</strong> hoàn toàn. Một giấc ngủ sâu sẽ giúp bạn thức dậy sảng khoái vào ngày mai.", poem: "\"Gió khuya thổi nhẹ qua mành,<br> Ngủ đi bạn nhé, <strong>mộng lành</strong> tìm về.\"" },
+                    { message: "Tối nay hãy dành thời gian <strong style='color: var(--primary-color);'>chăm sóc bản thân</strong> nhé. Một ly sữa ấm, bản nhạc nhẹ, và những suy nghĩ tích cực sẽ mang đến giấc ngủ ngon.", poem: "\"Đêm về gió mát trăng thanh,<br>Chúc em ngủ ngon, <strong>mộng lành</strong> đêm qua.\"" }
+                ];
+                rotatingThoughts = [
+                    "Thư giãn và tận hưởng buổi tối của bạn.",
+                    "Một bản nhạc nhẹ nhàng sẽ giúp bạn dễ ngủ hơn.",
+                    "Gác lại lo âu, ngày mai lại bắt đầu.",
+                    "Bạn là tuyệt vời nhất!",
+                    "Ngủ thật ngon nhé!",
+                    "Hôm nay bạn đã làm rất tốt rồi!",
+                    "Nhớ tắt điện thoại trước khi ngủ nha!"
+                ];
+                analysisOptions = [
+                    "Không gian 'yên tĩnh' bao trùm.",
+                    "Cảm nhận sự 'bình yên' sâu lắng.",
+                    "Chỉ số 'thư giãn' ở mức cao.",
+                    "Thời gian để nghỉ ngơi.",
+                    "Năng lượng 'dịu êm' được ghi nhận."
+                ];
+                statusOptions = [
+                    "Đến giờ nghỉ ngơi!",
+                    "Nạp năng lượng cho ngày mai!",
+                    "Tận hưởng sự yên tĩnh!",
+                    "Thư giãn hoàn toàn!",
+                    "Chuẩn bị cho giấc ngủ ngon!"
+                ];
+            }
+
+            // Select random content
+            const randomVariation = greetingVariations[Math.floor(Math.random() * greetingVariations.length)];
+            const randomMain = mainMessages[Math.floor(Math.random() * mainMessages.length)];
+            const randomAnalysis = analysisOptions[Math.floor(Math.random() * analysisOptions.length)];
+            const randomStatus = statusOptions[Math.floor(Math.random() * statusOptions.length)];
+
+            // Apply content with typewriter effect
+            typeWriter(document.getElementById('greeting-title'), randomVariation.title);
+            document.getElementById('greeting-subtitle').textContent = randomVariation.subtitle;
+            document.getElementById('current-time').innerHTML = `<strong>[TIME]:</strong> ${currentTimeString} ${timeEmoji}`;
+            document.getElementById('analysis-text').innerHTML = `<strong>[PHÂN TÍCH]:</strong> ${randomAnalysis}`;
+            document.getElementById('system-status').innerHTML = `<strong>[TRẠNG THÁI]:</strong> <strong class="status-ok">${randomStatus}</strong>`;
+            document.title = randomVariation.title;
+
+            document.getElementById('dynamic-message-text').innerHTML = `<p>${randomMain.message}</p>`;
+            document.getElementById('dynamic-poem-text').innerHTML = randomMain.poem;
+
+            // Rotating thoughts
             const flirtContainer = document.querySelector('.flirt-container');
             const flirtElements = flirtContainer.querySelectorAll('.flirt-line');
             let currentThoughtIndex = 0;
-            
+            let thoughtInterval;
+
             function showNextThought() {
                 flirtElements.forEach(el => el.classList.remove('active'));
-                const elementIndex = currentThoughtIndex % flirtElements.length;
-                flirtElements[elementIndex].classList.add('active');
-                currentThoughtIndex++;
+                if (rotatingThoughts.length > 0 && flirtElements.length > 0) {
+                    const messageIndex = currentThoughtIndex % rotatingThoughts.length;
+                    const elementIndex = currentThoughtIndex % flirtElements.length;
+                    flirtElements[elementIndex].textContent = rotatingThoughts[messageIndex];
+                    flirtElements[elementIndex].classList.add('active');
+                    currentThoughtIndex++;
+                }
             }
-            
-            setTimeout(() => {
-                showNextThought();
-                setInterval(showNextThought, 6000);
-            }, 5900);
-        }
 
-        // --- Random Icon ---
-        function setupRandomIcon() {
+            if (flirtElements.length > 0 && rotatingThoughts.length > 0) {
+                const thoughtStartTime = 4900 + 1000;
+                setTimeout(() => {
+                    showNextThought();
+                    thoughtInterval = setInterval(showNextThought, 6000);
+                }, thoughtStartTime);
+            } else {
+                flirtContainer.style.display = 'none';
+            }
+
+            // Random icon
             const iconElement = document.querySelector('.icon');
-            const icons = ['😊', '💖', '✨', '🌸', '🌟', '☀️', '🌙'];
+            const icons = ['😊', '💖', '✨', '🌸', '🌟', '☀️', '🌙', '🌺', '💫', '🌷'];
             iconElement.textContent = icons[Math.floor(Math.random() * icons.length)];
-        }
 
-        // --- Initialize Everything ---
-        document.addEventListener('DOMContentLoaded', () => {
-            createAdvancedParticles();
+            // Setup all features
+            createParticles();
+            setTimeout(createConfetti, 4000);
+            fetchWeather();
             setupParallax();
             setupTimeTooltips();
-            setupRotatingThoughts();
-            setupRandomIcon();
-            
-            // Basic content setup
-            document.getElementById('current-time').innerHTML = `<strong>[TIME]:</strong> ${currentTimeString} ${timeEmoji}`;
-            document.title = `Lời Chào ${timeOfDay}!`;
-            
-            // Typewriter effects
-            typeWriter(document.getElementById('greeting-title'), `Chào ${timeOfDay}!`);
-            document.getElementById('greeting-subtitle').textContent = `Thông điệp đặc biệt dành cho bạn vào ${timeOfDay.toLowerCase()}`;
-            
-            // Delayed effects
-            setTimeout(() => {
-                document.getElementById('analysis-text').innerHTML = `<strong>[PHÂN TÍCH]:</strong> Năng lượng ${timeOfDay.toLowerCase()} đang được nạp.`;
-                document.getElementById('system-status').innerHTML = `<strong>[TRẠNG THÁI]:</strong> <strong class="status-ok">Sẵn sàng!</strong>`;
-            }, 1900);
-            
-            setTimeout(createConfetti, 4000);
-            setTimeout(fetchWeather, 3000);
+            setupSecretMessage();
         });
     </script>
 </body>
